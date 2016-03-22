@@ -13,11 +13,6 @@ def playerinput(string):
         playernames.append(input("Enter Player " + string + " Name:   "))
         playerinput(str(int(string) - 1))
         
-        
-        
-
-    
-        
 class Player:
     
     def __init__(self, name, color, position):
