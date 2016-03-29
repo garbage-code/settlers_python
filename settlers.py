@@ -2,8 +2,15 @@
 import random
 import pygame
 
+def roll():
+    dice = random.randint(2, 7) + random.randint(7, 12)
+
 types = ["bread", "sauce", "cheese", "ham", "pepperoni"]
-trigger = [dice1, dice2]
+board = [["_", "_", "T", "_", "T", "_", "T", "_", "_"], 
+         ["_", "T", "_", "T", "_", "T", "_", "T", "_"], 
+         ["T", "_", "T", "_", "T", "_", "T", "_", "T"], 
+         ["_", "T", "_", "T", "_", "T", "_", "T", "_"], 
+         ["_", "_", "T", "_", "T", "_", "T", "_", "_"]]
 
 
 
@@ -23,35 +30,30 @@ def playerinput(string):
         
 class Player:
     
-    def __init__(self, name, color, position, cards, cities, roads):
+    def __init__(self, name, color, position, resources, development, progress, points, special):
         self.name = name
         self.color = color
         self.position = position
-        self.items = {}
-        
+        self.resources = []
+        self.development = []
+        self.progress = []
+        self.points = points
+        self.special = []
+
+"""       
     def isturn(self, turn): #Global turn must be implemented
         if self.position == turn:
             return True
         else:
             return False
+"""
 
-    def add_item(self, item):
-        self.items[item.name] = item
-
-class Card:
-    def __init__(self, resource, 
-
-def roll():
-    dice1 = random.randint(2, 7)
-    dice2 = random.randint(7, 12)
 
 class Tile:
-
-
     def __init__(self, type, trigger):
         self.type = type
         self.trigger = trigger
-"""
+
 class ResourceCard:
 
     def __init__(self, type):
@@ -70,4 +72,3 @@ class ProgressCard:
 
     def __init__(self, protype):
         self.protype = protype
-"""
