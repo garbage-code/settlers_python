@@ -26,3 +26,5 @@ class Player:
         else:
             return False
 
+#objects suck, functional 4 life
+
