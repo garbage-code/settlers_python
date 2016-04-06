@@ -443,64 +443,7 @@ def ClusterToNode():
             node.resource = temp
     
         
-    
-["ham", "pineapple", "cheese", "sauce", "bread", "desert"]
-"""
-def clean():
-    for node in Nodes:
-        temp = []
-        if node.resource.count("ham") == 2:
-            temp.append("ham")
-        elif node.resource.count("pineapple") == 2:
-            temp.append("pineapple") 
-        elif node.resource.count('cheese') == 2:
-            temp.append("cheese") 
-        elif node.resource.count("sauce") == 2:
-            temp.append("sauce") 
-        elif node.resource.count("desert") == 2:
-            temp.append("desert") 
-        elif node.resource.count("bread") == 2:
-            temp.append("bread")   
-        elif node.resource.count("ham") == 4:
-            temp.append("ham")
-            temp.append("ham")
-        elif node.resource.count("pineapple") == 4:
-            temp.append("pineapple") 
-            temp.append("pineapple") 
-        elif node.resource.count('cheese') == 4:
-            temp.append("cheese") 
-            temp.append("cheese") 
-        elif node.resource.count("sauce") == 4:
-            temp.append("sauce") 
-            temp.append("sauce") 
-        elif node.resource.count("desert") == 4:
-            temp.append("desert") 
-            temp.append("desert") 
-        elif node.resource.count("bread") == 4:
-            temp.append("bread") 
-            temp.append("bread") 
-    node.resource = temp 
-"""
-        
-def cleanhouse():
-    for node in Nodes:
-        temp = []
-        if node.resource.count("ham") > 0:
-            temp.append("ham")
-        elif node.resource.count("pineapple") > 0:
-            temp.append("pineapple")
-        elif node.resource.count("cheese") > 0:
-            temp.append("cheese")
-        elif node.resource.count("sauce") > 0:
-            temp.append("sauce")
-        elif node.resource.count('desert') > 0:
-            temp.append("desert")
-        elif node.resource.count('bread') > 0:
-            temp.append("bread")
-    node.resource = temp
-        
-
-        
+ 
 InitialHexResourceRandomizer()
 ClusterToNode()
 

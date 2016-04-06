@@ -3,6 +3,9 @@ import random
 import pygame
 
 
+def which_resource():
+    genresource = random.choice(["bread", "sauce", "cheese", "ham", "pepperoni"])
+
 types = ["bread", "sauce", "cheese", "ham", "pepperoni"]
 
 def play():
@@ -16,8 +19,7 @@ playernames = []
 playercolor = [] 
 playerposition = []
 
-
-           
+              
 def playerinput(string):
     global playernames
     global colors
@@ -74,144 +76,89 @@ class ProgressCard:
 
 
 #class Card:
- #   def __init__(self, resource, 
+ #   def __init__(self, resource,
 
 #54 nodes
 class Node:
-    def __init__(self, id, resource, isroad):
+    def __init__(self, id):
         self.id = id
         self.resource = []
-        self.isroad = False
 
     
-    def res_calc(self, resource):
-        if resource == usedResources[i]:#variable here which will be from the map generator that will match triggers to resources
-            if comment_var == "ham":
-                Player.resources['ham'] += 1
-            elif comment_var == "pineapple":
-                Player.resources['pineapple'] += 1
-            elif comment_var == "bread":
-                Player.resources['bread'] += 1
-            elif comment_var == "cheese":
-                Player.resources['cheese'] += 1
-            elif comment_var == "sauce":
-                Player.resources['sauce'] += 1
+   # def res_calc(self, resource):
+    #    if resource == usedResources[i]:#variable here which will be from the
+    #    map generator that will match triggers to resources
+     #       if comment_var == "ham":
+      #          Player.resources['ham'] += 1
+        #    elif comment_var == "pineapple":
+         #       Player.resources['pineapple'] += 1
+          #  elif comment_var == "bread":
+           #     Player.resources['bread'] += 1
+            #elif comment_var == "cheese":
+             #   Player.resources['cheese'] += 1
+            #elif comment_var == "sauce":
+             #   Player.resources['sauce'] += 1
 
-    def isroad():
-        if road_button == pressed #button to make roads is clicked
-
-node1 = Node()
-node1.id = 1
-node2 = Node()
-node2.id = 2
-node3 = Node()
-node3.id = 3
-node4 = Node()
-node4.id = 4
-node5 = Node()
-node5.id = 5
-node6 = Node()
-node6.id = 6
-node7 = Node()
-node7.id = 7
-node8 = Node()
-node8.id = 8
-node9 = Node()
-node9.id = 9
-node10 = Node()
-node10.id = 10
-node11 = Node()
-node11.id = 11
-node12 = Node()
-node12.id = 12
-node13 = Node()
-node13.id = 13
-node14 = Node()
-node14.id = 14
-node15 = Node()
-node15.id = 15
-node16 = Node()
-node16.id = 16
-node17 = Node()
-node17.id = 17
-node18 = Node()
-node18.id = 18
-node19 = Node()
-node19.id = 19
-node20 = Node()
-node20.id = 20
-node21 = Node()
-node21.id = 21
-node22 = Node()
-node22.id = 22
-node23 = Node()
-node23.id = 23
-node24 = Node()
-node24.id = 24
-node25 = Node()
-node25.id = 25
-node26 = Node()
-node26.id = 26
-node27 = Node()
-node27.id = 27
-node28 = Node()
-node28.id = 28
-node29 = Node()
-node29.id = 29
-node30 = Node()
-node30.id = 30
-node31 = Node()
-node31.id = 31
-node32 = Node()
-node32.id = 32
-node33 = Node()
-node33.id = 33
-node34 = Node()
-node34.id = 34
-node35 = Node()
-node35.id = 35
-node36 = Node()
-node36.id = 36
-node37 = Node()
-node37.id = 37
-node38 = Node()
-node38.id = 38
-node39 = Node()
-node39.id = 39
-node40 = Node()
-node40.id = 40
-node41 = Node()
-node41.id = 41
-node42 = Node()
-node42.id = 42
-node43 = Node()
-node43.id = 43
-node44 = Node()
-node44.id = 44
-node45 = Node()
-node45.id = 45
-node46 = Node()
-node46.id = 46
-node47 = Node()
-node47.id = 47
-node48 = Node()
-node48.id = 48
-node49 = Node()
-node49.id = 49
-node50 = Node()
-node50.id = 50
-node51 = Node()
-node51.id = 51
-node52 = Node()
-node52.id = 52
-node53 = Node()
-node53.id = 53
-node54 = Node()
-node54.id = 54
+    #def isroad():
+     #   if road_button == pressed #button to make roads is clicked
+node1 = Node(1)
+node2 = Node(2)
+node3 = Node(3)
+node4 = Node(4)
+node5 = Node(5)
+node6 = Node(6)
+node7 = Node(7)
+node8 = Node(8)
+node9 = Node(9)
+node10 = Node(10)
+node11 = Node(11)
+node12 = Node(12)
+node13 = Node(13)
+node14 = Node(14)
+node15 = Node(15)
+node16 = Node(16)
+node17 = Node(17)
+node18 = Node(18)
+node19 = Node(19)
+node20 = Node(20)
+node21 = Node(21)
+node22 = Node(22)
+node23 = Node(23)
+node24 = Node(24)
+node25 = Node(25)
+node26 = Node(26)
+node27 = Node(27)
+node28 = Node(28)
+node29 = Node(29)
+node30 = Node(30)
+node31 = Node(31)
+node32 = Node(32)
+node33 = Node(33)
+node34 = Node(34)
+node35 = Node(35)
+node36 = Node(36)
+node37 = Node(37)
+node38 = Node(38)
+node39 = Node(39)
+node40 = Node(40)
+node41 = Node(41)
+node42 = Node(42)
+node43 = Node(43)
+node44 = Node(44)
+node45 = Node(45)
+node46 = Node(46)
+node47 = Node(47)
+node48 = Node(48)
+node49 = Node(49)
+node50 = Node(50)
+node51 = Node(51)
+node52 = Node(52)
+node53 = Node(53)
+node54 = Node(54)
 
 class Road:
-    def __init__(self, isroad, nodes):
-        self.isroad = False
+    def __init__(self, isroad=False):
+        self.isroad = isroad
         self.nodes = []
 
 road0 = Road()
@@ -359,84 +306,11 @@ road70.nodes = [node33, node38]
 road71 = Road()
 road71.nodes = [node44, node39]
 
-"""
-roads = [[node1, node4], 
-         [node1, node5], 
-         [node5, node2], 
-         [node2, node6], 
-         [node6, node3], 
-         [node3, node7], 
-         [node4, node8], 
-         [node5, node9], 
-         [node6, node10],
-         [node7, node11],
-         [node12, node8], 
-         [node8, node13], 
-         [node13, node9], 
-         [node9, node14], 
-         [node14, node10], 
-         [node10, node15], 
-         [node15, node11], 
-         [node11, node16],
-         [node12, node17], 
-         [node13, node18], 
-         [node14, node19], 
-         [node15, node20], 
-         [node16, node21],
-         [node22, node17], 
-         [node17, node23], 
-         [node23, node18], 
-         [node18, node24], 
-         [node24, node19], 
-         [node19, node25], 
-         [node25, node20], 
-         [node20, node26], 
-         [node26, node21], 
-         [node21, node27],
-         [node22, node28], 
-         [node23, node29], 
-         [node24, node30], 
-         [node25, node31], 
-         [node26, node32], 
-         [node27, node33],
-         [node28, node34], 
-         [node34, node29], 
-         [node29, node35], 
-         [node35, node30], 
-         [node30, node36], 
-         [node36, node31], 
-         [node31, node37], 
-         [node37, node32], 
-         [node32, node38],
-         [node34, node39], 
-         [node35, node40], 
-         [node36, node41], 
-         [node37, node42], 
-         [node38, node43],
-         [node44, node40], 
-         [node40, node45], 
-         [node45, node41], 
-         [node41, node46], 
-         [node46, node42], 
-         [node42, node47], 
-         [node47, node43],
-         [node44, node48], 
-         [node45, node49], 
-         [node46, node50], 
-         [node47, node51],
-         [node48, node52], 
-         [node52, node49], 
-         [node49, node53], 
-         [node53, node50], 
-         [node50, node54], 
-         [node54, node51],
-         [node33, node38],
-         [node44, node39]]
-"""
+
 
 class Cluster:
-    def __init__(self, resource, roads):
-        self.resource = ResourceGenned
+    def __init__(self):
+        self.resource = ""
         self.roads = []
 
 Cluster1 = Cluster()
@@ -545,17 +419,138 @@ def InitialHexResourceRandomizer():
     Cluster18.resource = usedResources[17]
     Cluster19.resource = usedResources[18]
             
+usedID = []
+IDGenned = []
 
-Clusters = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, CLuster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
+def InitialHexTriggerRandomizer():
+    if len(usedID) < 18:            
+        IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
+        if IDGenVar == 2:
+            if usedID.count(2) == 0:
+                usedID.append(2)
+                IDGenned.append(2)
+                InitialHexTriggerRandomizer()
+            else:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 3:
+            if usedID.count(3) == 0 or usedID.count(3) == 1:
+                usedID.append(3)
+                IDGenned.append(3)
+                InitialHexTriggerRandomizer()
+            if usedID.count(3) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 4:
+            if usedID.count(4) == 0 or usedID.count(4) == 1:
+                usedID.append(4)
+                IDGenned.append(4)
+                InitialHexTriggerRandomizer()
+            if usedID.count(4) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 5:
+            if usedID.count(5) == 0 or usedID.count(5) == 1:
+                usedID.append(5)
+                IDGenned.append(5)
+                InitialHexTriggerRandomizer()
+            if usedID.count(5) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 6:
+            if usedID.count(6) == 0 or usedID.count(6) == 1:
+                usedID.append(6)
+                IDGenned.append(6)
+                InitialHexTriggerRandomizer()
+            if usedID.count(6) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 8:
+            if usedID.count(8) == 0 or usedID.count(8) == 1:
+                usedID.append(8)
+                IDGenned.append(8)
+                InitialHexTriggerRandomizer()
+            if usedID.count(8) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 9:
+            if usedID.count(9) == 0 or usedID.count(9) == 1:
+                usedID.append(9)
+                IDGenned.append(9)
+                InitialHexTriggerRandomizer()
+            if usedID.count(9) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 10:
+            if usedID.count(10) == 0 or usedID.count(10) == 1:
+                usedID.append(10)
+                IDGenned.append(10)
+                InitialHexTriggerRandomizer()
+            if usedID.count(10) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 11:
+            if usedID.count(11) == 0 or usedID.count(11) == 1:
+                usedID.append(11)
+                IDGenned.append(11)
+                InitialHexTriggerRandomizer()
+            if usedID.count(11) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 12:
+            if usedID.count(12) == 0:
+                usedID.append(12)
+                IDGenned.append(12)
+                InitialHexTriggerRandomizer()
+            if usedID.count(12) >= 2:
+                InitialHexTriggerRandomizer()
+    Cluster1.trigger = IDGenned[0]
+    Cluster2.trigger = IDGenned[1]
+    Cluster3.trigger = IDGenned[2]
+    Cluster4.trigger = IDGenned[3]
+    Cluster5.trigger = IDGenned[4]
+    Cluster6.trigger = IDGenned[5]
+    Cluster7.trigger = IDGenned[6]
+    Cluster8.trigger = IDGenned[7]
+    Cluster9.trigger = IDGenned[8]
+    Cluster10.trigger = IDGenned[9]
+    Cluster11.trigger = IDGenned[10]
+    Cluster12.trigger = IDGenned[11]
+    Cluster13.trigger = IDGenned[12]
+    Cluster14.trigger = IDGenned[13]
+    Cluster15.trigger = IDGenned[14]
+    Cluster16.trigger = IDGenned[15]
+    Cluster17.trigger = IDGenned[16]
+    Cluster18.trigger = IDGenned[17]
+
+clusters = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
 Roads = [road1, road2, road3, road4, road5, road6, road7, road8, road9, road10, road11, road12, road13, road14, road15, road16, road17, road18, road19, road20, road21, road22, road23, road24, road25, road26, road27, road28, road29, road30, road31, road32, road33, road34, road35, road36, road37, road38, road39, road40, road41, road42, road43, road44, road45, road46, road47, road48, road49, road50, road51, road52, road53, road54, road55, road56, road57, road58, road59, road60, road61, road62, road63, road64, road65, road66, road67, road68, road69, road70, road71]
+Nodes = [node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16, node17, node18, node19, node20, node21, node22, node23, node24, node25, node26, node27, node28, node29, node30, node31, node32, node33, node34, node35, node36, node37, node38, node39, node40, node41, node42, node43, node44, node45, node46, node47, node48, node49, node50, node51, node52, node53, node54]
 
-def ClusterToNode(cluster):
-    for cluster in Clusters:
-        for nodes in roads in cluster.roads:
-            nodes.resource.append(cluster.resource)
+def ClusterToNode():
+    for cluster in clusters:
+        for road in cluster.roads:
+            for node in road.nodes:
+                node.resource.append(cluster.resource)
+                node.trigger = cluster.trigger
+            temp = []
+            if node.resource.count("ham") == 2:
+                temp.append("ham")
+            elif node.resource.count("pineapple") == 2:
+                temp.append("pineapple")
+            elif node.resource.count("cheese") == 2:
+                temp.append("cheese")
+            elif node.resource.count("sauce") == 2:
+                temp.append("sauce")
+            elif node.resource.count("bread") == 2:
+                temp.append("bread")
+            elif node.resource.count("desert") == 2:
+                temp.append("desert")
+            node.resource = temp
+    
+        
+ 
+InitialHexResourceRandomizer()
+InitialHexTriggerRandomizer()
+ClusterToNode()
+print(usedID)
+
 
 # def init():
  #   for i in numplayers:
    #     player + i  = Player(playernames(i), playercolor(i), playerposition(i))
         
-playerinput(play())
+#playerinput(play())
+
+
