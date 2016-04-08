@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{edb86863-8816-4140-8392-b637b8de7066}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>settlers.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="hex.png" />
+    <Content Include="hexes\bread.png" />
+    <Content Include="hexes\cheese.png" />
+    <Content Include="hexes\ham.png" />
+    <Content Include="hexes\pineapple.png" />
+    <Content Include="hexes\tomatosauce.png" />
+    <Content Include="pygame_testing\ball.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DisplayingOfMap.py" />
+    <Compile Include="pygame_testing\aperturescience.py" />
+    <Compile Include="pygame_testing\test.py" />
+    <Compile Include="settlers.py" />
+    <Compile Include="settlers_test.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="hexes" />
+    <Folder Include="pygame_testing" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
