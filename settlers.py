@@ -850,7 +850,7 @@ usedID = []
 IDGenned = []
 
 def InitialHexTriggerRandomizer():
-    while Cluster18.trigger == None:
+    while Cluster18.trigger == "":
         if len(usedID) < 18:            
             IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
             if IDGenVar == 2:
@@ -952,8 +952,8 @@ def ClusterToNode():
         for road in cluster.roads:
             for node in road.nodes:
                 node.resource.append(cluster.resource)
-                #node.isrobber = cluster.isrobber
-                #hamburglar()
+                node.isrobber = cluster.isrobber
+                hamburglar()
                 #if clusters.isrobber == True:
                 #    robber_loc = node                
             temp = []
