@@ -1,27 +1,26 @@
 #Settlers of Catan
 import random
-##import pygame
+import pygame
 
 
-def ptsd():
-    global trigger
-    trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-    
 types = ["bread", "sauce", "cheese", "ham", "pepperoni"]
 
 def play():
     input1 = input("How Many Players?:   ")
-    ##numplayers = input1
+    numplayers = input1
     return str(input1)
 
-##numplayers = 0
+numplayers = 0
 colors = ['red', 'blue', 'white', 'orange', 'green', 'brown']
 playernames = [] 
 playercolor = [] 
 playerposition = []
 
-
 turn = 1
+
+
+def ptsd():
+    trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 def init():
     global P1
@@ -69,16 +68,19 @@ class Player:
         self.name = name
         self.color = color
         self.position = position
-        self.resources = {'ham'      : 0, 
-                          'pineapple': 0, 
-                          'bread'    : 0, 
-                          'sauce'    : 0, 
-                          'cheese'   : 0}
-        self.development = []
-        self.progress = []
-        self.special = []
-        self.nodes = []
-        self.roads = []
+        self.resources = {'ham'        : 0, 
+                          'pineapple'  : 0, 
+                          'bread'      : 0, 
+                          'sauce'      : 0, 
+                          'cheese'     : 0,
+                          'knight'     : 0,
+                          'progress'   : 0,
+                          'vpoint'     : 0,
+                          'rbuilding'  : 0,
+                          'yplenty'    : 0,
+                          'monopoly'   : 0}
+        self.longestroad = False
+        self.largestarmy = False
     
     def claimnode(self, node): # Needs finishing
         if node == 1:
@@ -119,26 +121,24 @@ class Player:
             node18.claim(self.color)
         elif node == 19:
             node19.claim(self.color)
-        elif node == 20:
-            node20.claim(self.color)
         elif node == 21:
-            node21.claim(self.color)
+            node20.claim(self.color)
         elif node == 22:
-            node22.claim(self.color)
+            node21.claim(self.color)
         elif node == 23:
-            node23.claim(self.color)
+            node22.claim(self.color)
         elif node == 24:
-            node24.claim(self.color)
+            node23.claim(self.color)
         elif node == 25:
-            node25.claim(self.color)
+            node24.claim(self.color)
         elif node == 26:
-            node26.claim(self.color)
+            node25.claim(self.color)
         elif node == 27:
-            node27.claim(self.color)
+            node26.claim(self.color)
         elif node == 28:
-            node28.claim(self.color)
+            node27.claim(self.color)
         elif node == 29:
-            node29.claim(self.color)
+            node28.claim(self.color)
         elif node == 30:
             node30.claim(self.color)
         elif node == 31:
@@ -333,124 +333,6 @@ class Player:
             road70.claim(self.color)
         elif road == 71:
             road71.claim(self.color)
-            
-    def makepapa(self, node):
-        if node == 1:
-            node1.makecity(self.color)
-        elif node == 2:
-            node2.makecity(self.color)
-        elif node == 3:
-            node3.makecity(self.color)
-        elif node == 4:
-            node4.makecity(self.color)
-        elif node == 5:
-            node5.makecity(self.color)
-        elif node == 6:
-            node6.makecity(self.color)
-        elif node == 7:
-            node7.makecity(self.color)
-        elif node == 8:
-            node8.makecity(self.color)
-        elif node == 9:
-            node9.makecity(self.color)
-        elif node == 10:
-            node10.makecity(self.color)
-        elif node == 11:
-            node11.makecity(self.color)
-        elif node == 12:
-            node12.makecity(self.color)
-        elif node == 13:
-            node13.makecity(self.color)
-        elif node == 14:
-            node14.makecity(self.color)
-        elif node == 15:
-            node15.makecity(self.color)
-        elif node == 16:
-            node16.makecity(self.color)
-        elif node == 17:
-            node17.makecity(self.color)
-        elif node == 18:
-            node18.makecity(self.color)
-        elif node == 19:
-            node19.makecity(self.color)
-        elif node == 20:
-            node20.makecity(self.color)
-        elif node == 21:
-            node21.makecity(self.color) #Oh Node - FIX THIS SOON
-        elif node == 22:
-            node22.makecity(self.color)
-        elif node == 23:
-            node23.makecity(self.color)
-        elif node == 24:
-            node24.makecity(self.color)
-        elif node == 25:
-            node25.makecity(self.color)
-        elif node == 26:
-            node26.makecity(self.color)
-        elif node == 27:
-            node27.makecity(self.color)
-        elif node == 28:
-            node28.makecity(self.color)
-        elif node == 29:
-            node29.makecity(self.color)
-        elif node == 30:
-            node30.makecity(self.color)
-        elif node == 31:
-            node31.makecity(self.color)
-        elif node == 32:
-            node32.makecity(self.color)
-        elif node == 33:
-            node33.makecity(self.color)
-        elif node == 34:
-            node34.makecity(self.color)
-        elif node == 35:
-            node35.makecity(self.color)
-        elif node == 36:
-            node36.makecity(self.color)
-        elif node == 37:
-            node37.makecity(self.color)
-        elif node == 38:
-            node38.makecity(self.color)
-        elif node == 39:
-            node39.makecity(self.color)
-        elif node == 40:
-            node40.makecity(self.color)
-        elif node ==41:
-            node41.makecity(self.color)
-        elif node == 42:
-            node42.makecity(self.color)
-        elif node == 43:
-            node43.makecity(self.color)
-        elif node == 44:
-            node44.makecity(self.color)
-        elif node == 45:
-            node45.makecity(self.color)
-        elif node == 46:
-            node46.makecity(self.color)
-        elif node == 47:
-            node47.makecity(self.color)
-        elif node == 48:
-            node48.makecity(self.color)
-        elif node == 49:
-            node49.makecity(self.color)
-        elif node == 50:
-            node50.makecity(self.color)
-        elif node == 51:
-            node51.makecity(self.color)
-        elif node == 52:
-            node52.makecity(self.color)
-        elif node == 53:
-            node53.makecity(self.color)
-        elif node == 54:
-            node54.makecity(self.color)
-        
-
-        
-            
-            
-    
-        
-
 
 class ResourceCard:
 
@@ -477,12 +359,12 @@ class ProgressCard:
 
 #54 nodes
 class Node:
-    def __init__(self, id, claimed = False, iscity = False):
+    def __init__(self, id, claimed = False):
         self.id = id
         self.resource = []
         self.claimed = claimed
         self.claimedby = ""
-        self.iscity = iscity 
+        self.isrobber = isrobber
     
     def claim(self, color):   #Need to only allow if certain color is other one
         if canclaim(self, color) == True:
@@ -495,10 +377,6 @@ class Node:
     def claimbypass(self, color):
         self.claimed = True
         self.claimedby = color
-    
-    def makecity(self, color):
-        if cancity(self, color) == True:
-            self.iscity = True 
         
 
     
@@ -738,12 +616,11 @@ road71.nodes = [node44, node39]
 
 
 class Cluster:
-    def __init__(self, isrobber = False):
+    def __init__(self):
         self.resource = ""
         self.roads = []
         self.isrobber = isrobber
         self.tempresource = ""
-        self.trigger = ""
 
 Cluster1 = Cluster()
 Cluster1.roads = [road0, road6, road11, road12, road7, road1]
@@ -765,6 +642,7 @@ Cluster9 = Cluster()
 Cluster9.roads = [road26, road35, road42, road41, road34, road25]
 Cluster10 = Cluster()
 Cluster10.roads = [road28, road36, road44, road43, road35, road27]
+Cluster10.isrobber = True
 Cluster11 = Cluster()
 Cluster11.roads = [road30, road37, road46, road45, road36, road29]
 Cluster12 = Cluster()
@@ -851,100 +729,6 @@ def InitialHexResourceRandomizer():
     Cluster18.resource = usedResources[17]
     Cluster19.resource = usedResources[18]
             
-usedID = []
-IDGenned = []
-
-def InitialHexTriggerRandomizer():
-    if len(usedID) < 18:            
-        IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
-        if IDGenVar == 2:
-            if usedID.count(2) == 0:
-                usedID.append(2)
-                IDGenned.append(2)
-                InitialHexTriggerRandomizer()
-            else:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 3:
-            if usedID.count(3) == 0 or usedID.count(3) == 1:
-                usedID.append(3)
-                IDGenned.append(3)
-                InitialHexTriggerRandomizer()
-            if usedID.count(3) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 4:
-            if usedID.count(4) == 0 or usedID.count(4) == 1:
-                usedID.append(4)
-                IDGenned.append(4)
-                InitialHexTriggerRandomizer()
-            if usedID.count(4) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 5:
-            if usedID.count(5) == 0 or usedID.count(5) == 1:
-                usedID.append(5)
-                IDGenned.append(5)
-                InitialHexTriggerRandomizer()
-            if usedID.count(5) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 6:
-            if usedID.count(6) == 0 or usedID.count(6) == 1:
-                usedID.append(6)
-                IDGenned.append(6)
-                InitialHexTriggerRandomizer()
-            if usedID.count(6) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 8:
-            if usedID.count(8) == 0 or usedID.count(8) == 1:
-                usedID.append(8)
-                IDGenned.append(8)
-                InitialHexTriggerRandomizer()
-            if usedID.count(8) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 9:
-            if usedID.count(9) == 0 or usedID.count(9) == 1:
-                usedID.append(9)
-                IDGenned.append(9)
-                InitialHexTriggerRandomizer()
-            if usedID.count(9) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 10:
-            if usedID.count(10) == 0 or usedID.count(10) == 1:
-                usedID.append(10)
-                IDGenned.append(10)
-                InitialHexTriggerRandomizer()
-            if usedID.count(10) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 11:
-            if usedID.count(11) == 0 or usedID.count(11) == 1:
-                usedID.append(11)
-                IDGenned.append(11)
-                InitialHexTriggerRandomizer()
-            if usedID.count(11) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 12:
-            if usedID.count(12) == 0:
-                usedID.append(12)
-                IDGenned.append(12)
-                InitialHexTriggerRandomizer()
-            if usedID.count(12) >= 2:
-                InitialHexTriggerRandomizer()
-    Cluster1.trigger = IDGenned[0]
-    Cluster2.trigger = IDGenned[1]
-    Cluster3.trigger = IDGenned[2]
-    Cluster4.trigger = IDGenned[3]
-    Cluster5.trigger = IDGenned[4]
-    Cluster6.trigger = IDGenned[5]
-    Cluster7.trigger = IDGenned[6]
-    Cluster8.trigger = IDGenned[7]
-    Cluster9.trigger = IDGenned[8]
-    Cluster10.trigger = IDGenned[9]
-    Cluster11.trigger = IDGenned[10]
-    Cluster12.trigger = IDGenned[11]
-    Cluster13.trigger = IDGenned[12]
-    Cluster14.trigger = IDGenned[13]
-    Cluster15.trigger = IDGenned[14]
-    Cluster16.trigger = IDGenned[15]
-    Cluster17.trigger = IDGenned[16]
-    Cluster18.trigger = IDGenned[17]
 
 clusters = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
 Roads = [road1, road2, road3, road4, road5, road6, road7, road8, road9, road10, road11, road12, road13, road14, road15, road16, road17, road18, road19, road20, road21, road22, road23, road24, road25, road26, road27, road28, road29, road30, road31, road32, road33, road34, road35, road36, road37, road38, road39, road40, road41, road42, road43, road44, road45, road46, road47, road48, road49, road50, road51, road52, road53, road54, road55, road56, road57, road58, road59, road60, road61, road62, road63, road64, road65, road66, road67, road68, road69, road70, road71]
@@ -974,7 +758,6 @@ def ClusterToNode():
             elif node.resource.count("desert") == 2:
                 temp.append("desert")
             node.resource = temp
-
     
         
     
@@ -991,8 +774,8 @@ def canclaimroad(roadr, color):
     return a
     
 def canclaim(noder, color):
-    colors = ['red', 'blue', 'white', 'orange', 'green', 'brown']
     colors.remove(color)
+    print(colors)
     a = False
     if noder.claimedby != '' or colors.count(noder.claimedby) > 0:
         return a
@@ -1004,13 +787,6 @@ def canclaim(noder, color):
                         a = True
     return a
                 
-def cancity(noder, color):
-    if noder.claimedby == color:
-        return True
-    else:
-        print("Can't Papa")
-        return False
-        
     
 #def turn:
  #   while 
@@ -1019,7 +795,7 @@ playerinput(play())
  
 def build(): #Needs to be finished
     global turn
-    print("\n Choices: \n Road (1 Pineapple, 1 Cheese) \n Pizza Hut (1 Bread, 1 Cheese, 1 Pineapple, 1 Sauce) \n Papa Johns (3 Ham, 2 Bread) \n  ")
+    print("\n Choices: \n Road (1 Pineapple, 1 Cheese) \n Pizza Hut (1 Bread, 1 Cheese, 1 Pineapple, 1 Sauce) \n PapaJohns (3 Ham, 2 Bread) \n  ")
     input2 = input("What would you like to construct?    ")
     if input2 == "Pizza Hut":
         input3 = input("Where would you like to to place this?  ")
@@ -1041,23 +817,15 @@ def build(): #Needs to be finished
             P3.claimroad(int(input3))
         if turn == 4:
             P4.claimroad(int(input3))
-    if input2 == "Papa Johns":
-        input3 = input("Where would you like to to place this?  ")
-        if turn == 1:
-            P1.makepapa(int(input3))
-        if turn == 2:
-            P2.makepapa(int(input3))
-        if turn == 3:
-            P3.makepapa(int(input3))
-        if turn == 4:
-            P4.makepapa(int(input3))
             
-            
+InitialHexResourceRandomizer()
+ClusterToNode()
+
 def hamburglar():
-    if clusters.isrobber == True:
+    if clusters.isrobber() == True:
         clusters.tempresource = clusters.resource
         clusters.resource = ""
-    if clusters.isrobber == False:
+    if clusters.isrobber() == False:
         if clusters.resource == "":
             clusters.resource = clusters.tempresource            
 
@@ -1067,13 +835,11 @@ def move_hamburglar():
         relevant_var = hamburglar_newloc - 1
         robber_loc = False
         clusters[relevant_var].isrobber = True
-        
-InitialHexTriggerRandomizer()
-InitialHexResourceRandomizer()
-ClusterToNode()
 
+        
+    
 
 
         
-#playerinput(play())
+playerinput(play())
 
