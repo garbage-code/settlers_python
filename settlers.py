@@ -444,18 +444,13 @@ class Player:
         elif node == 54:
             node54.makecity(self.color)
         
-
-        
             
             
     
         
 
 
-class ResourceCard:
 
-    def __init__(self, type):
-        self.type = type
 
 class DevelopmentCard:
 
@@ -957,7 +952,7 @@ def ClusterToNode():
         for road in cluster.roads:
             for node in road.nodes:
                 node.resource.append(cluster.resource)
-                #node.isrobber = clusters.isrobber
+                #node.isrobber = cluster.isrobber
                 #hamburglar()
                 #if clusters.isrobber == True:
                 #    robber_loc = node                
