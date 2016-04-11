@@ -855,96 +855,97 @@ usedID = []
 IDGenned = []
 
 def InitialHexTriggerRandomizer():
-    if len(usedID) < 18:            
-        IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
-        if IDGenVar == 2:
-            if usedID.count(2) == 0:
-                usedID.append(2)
-                IDGenned.append(2)
-                InitialHexTriggerRandomizer()
-            else:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 3:
-            if usedID.count(3) == 0 or usedID.count(3) == 1:
-                usedID.append(3)
-                IDGenned.append(3)
-                InitialHexTriggerRandomizer()
-            if usedID.count(3) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 4:
-            if usedID.count(4) == 0 or usedID.count(4) == 1:
-                usedID.append(4)
-                IDGenned.append(4)
-                InitialHexTriggerRandomizer()
-            if usedID.count(4) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 5:
-            if usedID.count(5) == 0 or usedID.count(5) == 1:
-                usedID.append(5)
-                IDGenned.append(5)
-                InitialHexTriggerRandomizer()
-            if usedID.count(5) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 6:
-            if usedID.count(6) == 0 or usedID.count(6) == 1:
-                usedID.append(6)
-                IDGenned.append(6)
-                InitialHexTriggerRandomizer()
-            if usedID.count(6) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 8:
-            if usedID.count(8) == 0 or usedID.count(8) == 1:
-                usedID.append(8)
-                IDGenned.append(8)
-                InitialHexTriggerRandomizer()
-            if usedID.count(8) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 9:
-            if usedID.count(9) == 0 or usedID.count(9) == 1:
-                usedID.append(9)
-                IDGenned.append(9)
-                InitialHexTriggerRandomizer()
-            if usedID.count(9) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 10:
-            if usedID.count(10) == 0 or usedID.count(10) == 1:
-                usedID.append(10)
-                IDGenned.append(10)
-                InitialHexTriggerRandomizer()
-            if usedID.count(10) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 11:
-            if usedID.count(11) == 0 or usedID.count(11) == 1:
-                usedID.append(11)
-                IDGenned.append(11)
-                InitialHexTriggerRandomizer()
-            if usedID.count(11) >= 2:
-                InitialHexTriggerRandomizer()
-        if IDGenVar == 12:
-            if usedID.count(12) == 0:
-                usedID.append(12)
-                IDGenned.append(12)
-                InitialHexTriggerRandomizer()
-            if usedID.count(12) >= 2:
-                InitialHexTriggerRandomizer()
-    Cluster1.trigger = IDGenned[0]
-    Cluster2.trigger = IDGenned[1]
-    Cluster3.trigger = IDGenned[2]
-    Cluster4.trigger = IDGenned[3]
-    Cluster5.trigger = IDGenned[4]
-    Cluster6.trigger = IDGenned[5]
-    Cluster7.trigger = IDGenned[6]
-    Cluster8.trigger = IDGenned[7]
-    Cluster9.trigger = IDGenned[8]
-    Cluster10.trigger = IDGenned[9]
-    Cluster11.trigger = IDGenned[10]
-    Cluster12.trigger = IDGenned[11]
-    Cluster13.trigger = IDGenned[12]
-    Cluster14.trigger = IDGenned[13]
-    Cluster15.trigger = IDGenned[14]
-    Cluster16.trigger = IDGenned[15]
-    Cluster17.trigger = IDGenned[16]
-    Cluster18.trigger = IDGenned[17]
+    while Cluster18.trigger == None:
+        if len(usedID) < 18:            
+            IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
+            if IDGenVar == 2:
+                if usedID.count(2) == 0:
+                    usedID.append(2)
+                    IDGenned.append(2)
+                    InitialHexTriggerRandomizer()
+                else:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 3:
+                if usedID.count(3) == 0 or usedID.count(3) == 1:
+                    usedID.append(3)
+                    IDGenned.append(3)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(3) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 4:
+                if usedID.count(4) == 0 or usedID.count(4) == 1:
+                    usedID.append(4)
+                    IDGenned.append(4)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(4) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 5:
+                if usedID.count(5) == 0 or usedID.count(5) == 1:
+                    usedID.append(5)
+                    IDGenned.append(5)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(5) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 6:
+                if usedID.count(6) == 0 or usedID.count(6) == 1:
+                    usedID.append(6)
+                    IDGenned.append(6)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(6) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 8:
+                if usedID.count(8) == 0 or usedID.count(8) == 1:
+                    usedID.append(8)
+                    IDGenned.append(8)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(8) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 9:
+                if usedID.count(9) == 0 or usedID.count(9) == 1:
+                    usedID.append(9)
+                    IDGenned.append(9)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(9) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 10:
+                if usedID.count(10) == 0 or usedID.count(10) == 1:
+                    usedID.append(10)
+                    IDGenned.append(10)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(10) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 11:
+                if usedID.count(11) == 0 or usedID.count(11) == 1:
+                    usedID.append(11)
+                    IDGenned.append(11)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(11) >= 2:
+                    InitialHexTriggerRandomizer()
+            if IDGenVar == 12:
+                if usedID.count(12) == 0:
+                    usedID.append(12)
+                    IDGenned.append(12)
+                    InitialHexTriggerRandomizer()
+                if usedID.count(12) >= 2:
+                    InitialHexTriggerRandomizer()
+        Cluster1.trigger = IDGenned[0]
+        Cluster2.trigger = IDGenned[1]
+        Cluster3.trigger = IDGenned[2]
+        Cluster4.trigger = IDGenned[3]
+        Cluster5.trigger = IDGenned[4]
+        Cluster6.trigger = IDGenned[5]
+        Cluster7.trigger = IDGenned[6]
+        Cluster8.trigger = IDGenned[7]
+        Cluster9.trigger = IDGenned[8]
+        Cluster10.trigger = IDGenned[9]
+        Cluster11.trigger = IDGenned[10]
+        Cluster12.trigger = IDGenned[11]
+        Cluster13.trigger = IDGenned[12]
+        Cluster14.trigger = IDGenned[13]
+        Cluster15.trigger = IDGenned[14]
+        Cluster16.trigger = IDGenned[15]
+        Cluster17.trigger = IDGenned[16]
+        Cluster18.trigger = IDGenned[17]
 
 clusters = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
 Roads = [road1, road2, road3, road4, road5, road6, road7, road8, road9, road10, road11, road12, road13, road14, road15, road16, road17, road18, road19, road20, road21, road22, road23, road24, road25, road26, road27, road28, road29, road30, road31, road32, road33, road34, road35, road36, road37, road38, road39, road40, road41, road42, road43, road44, road45, road46, road47, road48, road49, road50, road51, road52, road53, road54, road55, road56, road57, road58, road59, road60, road61, road62, road63, road64, road65, road66, road67, road68, road69, road70, road71]
@@ -956,10 +957,10 @@ def ClusterToNode():
         for road in cluster.roads:
             for node in road.nodes:
                 node.resource.append(cluster.resource)
-                node.isrobber = cluster.isrobber
-                hamburglar()
-                if clusters.isrobber == True:
-                    robber_loc = node                
+                #node.isrobber = clusters.isrobber
+                #hamburglar()
+                #if clusters.isrobber == True:
+                #    robber_loc = node                
             temp = []
             if node.resource.count("ham") == 2:
                 temp.append("ham")
