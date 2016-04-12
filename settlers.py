@@ -77,6 +77,11 @@ class Cluster:
         self.isrobber = isrobber
         self.tempresource = ""
         self.trigger = ""
+        
+def roller():
+    global trigger
+    trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+
 node1 = Node(1)
 node2 = Node(2)
 node3 = Node(3)
@@ -244,16 +249,17 @@ class Player:
         self.roads = []
 
     def payoff(self):
-        if clusters.trigger == trigger:
-                if clusters.resource == "ham":
+        for cluster in clusters:
+            if cluster.trigger == trigger:
+                if cluster.resource == "ham":
                     self.resources['ham'] += 1
-                elif clusters.resource == "pineapple":
+                elif cluster.resource == "pineapple":
                     self.resources['pineapple'] += 1
-                elif clusters.resource == "bread":
+                elif cluster.resource == "bread":
                     self.resources['bread'] += 1
-                elif clusters.resource == "cheese":
+                elif cluster.resource == "cheese":
                     self.resources['cheese'] += 1
-                elif clusters.resource == "sauce":
+                elif cluster.resource == "sauce":
                     self.resources['sauce'] += 1
     
     def claimnode(self, node): # Needs finishing
@@ -626,9 +632,6 @@ class Player:
 
 
 
-def roller():
-    global trigger
-    trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 
 
@@ -765,97 +768,96 @@ usedID = []
 IDGenned = []
 
 def InitialHexTriggerRandomizer():
-    while len(IDGenned) == 18:
-        if len(usedID) < 18:            
-            IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
-            if IDGenVar == 2:
-                if usedID.count(2) == 0:
-                    usedID.append(2)
-                    IDGenned.append(2)
-                    InitialHexTriggerRandomizer()
-                else:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 3:
-                if usedID.count(3) == 0 or usedID.count(3) == 1:
-                    usedID.append(3)
-                    IDGenned.append(3)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(3) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 4:
-                if usedID.count(4) == 0 or usedID.count(4) == 1:
-                    usedID.append(4)
-                    IDGenned.append(4)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(4) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 5:
-                if usedID.count(5) == 0 or usedID.count(5) == 1:
-                    usedID.append(5)
-                    IDGenned.append(5)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(5) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 6:
-                if usedID.count(6) == 0 or usedID.count(6) == 1:
-                    usedID.append(6)
-                    IDGenned.append(6)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(6) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 8:
-                if usedID.count(8) == 0 or usedID.count(8) == 1:
-                    usedID.append(8)
-                    IDGenned.append(8)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(8) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 9:
-                if usedID.count(9) == 0 or usedID.count(9) == 1:
-                    usedID.append(9)
-                    IDGenned.append(9)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(9) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 10:
-                if usedID.count(10) == 0 or usedID.count(10) == 1:
-                    usedID.append(10)
-                    IDGenned.append(10)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(10) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 11:
-                if usedID.count(11) == 0 or usedID.count(11) == 1:
-                    usedID.append(11)
-                    IDGenned.append(11)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(11) >= 2:
-                    InitialHexTriggerRandomizer()
-            if IDGenVar == 12:
-                if usedID.count(12) == 0:
-                    usedID.append(12)
-                    IDGenned.append(12)
-                    InitialHexTriggerRandomizer()
-                if usedID.count(12) >= 2:
-                    InitialHexTriggerRandomizer()
-        Cluster1.trigger = IDGenned[0]
-        Cluster2.trigger = IDGenned[1]
-        Cluster3.trigger = IDGenned[2]
-        Cluster4.trigger = IDGenned[3]
-        Cluster5.trigger = IDGenned[4]
-        Cluster6.trigger = IDGenned[5]
-        Cluster7.trigger = IDGenned[6]
-        Cluster8.trigger = IDGenned[7]
-        Cluster9.trigger = IDGenned[8]
-        Cluster10.trigger = IDGenned[9]
-        Cluster11.trigger = IDGenned[10]
-        Cluster12.trigger = IDGenned[11]
-        Cluster13.trigger = IDGenned[12]
-        Cluster14.trigger = IDGenned[13]
-        Cluster15.trigger = IDGenned[14]
-        Cluster16.trigger = IDGenned[15]
-        Cluster17.trigger = IDGenned[16]
-        Cluster18.trigger = IDGenned[17]
+    while len(usedID) < 18:          
+        IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
+        if IDGenVar == 2:
+            if usedID.count(2) == 0:
+                usedID.append(2)
+                IDGenned.append(2)
+                InitialHexTriggerRandomizer()
+            else:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 3:
+            if usedID.count(3) == 0 or usedID.count(3) == 1:
+                usedID.append(3)
+                IDGenned.append(3)
+                InitialHexTriggerRandomizer()
+            if usedID.count(3) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 4:
+            if usedID.count(4) == 0 or usedID.count(4) == 1:
+                usedID.append(4)
+                IDGenned.append(4)
+                InitialHexTriggerRandomizer()
+            if usedID.count(4) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 5:
+            if usedID.count(5) == 0 or usedID.count(5) == 1:
+                usedID.append(5)
+                IDGenned.append(5)
+                InitialHexTriggerRandomizer()
+            if usedID.count(5) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 6:
+            if usedID.count(6) == 0 or usedID.count(6) == 1:
+                usedID.append(6)
+                IDGenned.append(6)
+                InitialHexTriggerRandomizer()
+            if usedID.count(6) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 8:
+            if usedID.count(8) == 0 or usedID.count(8) == 1:
+                usedID.append(8)
+                IDGenned.append(8)
+                InitialHexTriggerRandomizer()
+            if usedID.count(8) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 9:
+            if usedID.count(9) == 0 or usedID.count(9) == 1:
+                usedID.append(9)
+                IDGenned.append(9)
+                InitialHexTriggerRandomizer()
+            if usedID.count(9) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 10:
+            if usedID.count(10) == 0 or usedID.count(10) == 1:
+                usedID.append(10)
+                IDGenned.append(10)
+                InitialHexTriggerRandomizer()
+            if usedID.count(10) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 11:
+            if usedID.count(11) == 0 or usedID.count(11) == 1:
+                usedID.append(11)
+                IDGenned.append(11)
+                InitialHexTriggerRandomizer()
+            if usedID.count(11) >= 2:
+                InitialHexTriggerRandomizer()
+        if IDGenVar == 12:
+            if usedID.count(12) == 0:
+                usedID.append(12)
+                IDGenned.append(12)
+                InitialHexTriggerRandomizer()
+            if usedID.count(12) >= 2:
+                InitialHexTriggerRandomizer()
+    Cluster1.trigger = IDGenned[0]
+    Cluster2.trigger = IDGenned[1]
+    Cluster3.trigger = IDGenned[2]
+    Cluster4.trigger = IDGenned[3]
+    Cluster5.trigger = IDGenned[4]
+    Cluster6.trigger = IDGenned[5]
+    Cluster7.trigger = IDGenned[6]
+    Cluster8.trigger = IDGenned[7]
+    Cluster9.trigger = IDGenned[8]
+    Cluster10.trigger = IDGenned[9]
+    Cluster11.trigger = IDGenned[10]
+    Cluster12.trigger = IDGenned[11]
+    Cluster13.trigger = IDGenned[12]
+    Cluster14.trigger = IDGenned[13]
+    Cluster15.trigger = IDGenned[14]
+    Cluster16.trigger = IDGenned[15]
+    Cluster17.trigger = IDGenned[16]
+    Cluster18.trigger = IDGenned[17]
 
 def ClusterToNode():
     global robber_loc
@@ -990,13 +992,13 @@ def initializepart2(n):
             else:
                 print("Please select an empty vertex")
                 input4 = input("Please place your second settlement, " + playerdict1[n].name + ":   ")
-        input4 = input("Please place your first road, " + playerdict1[n].name + ":   ")
+        input4 = input("Please place your second road, " + playerdict1[n].name + ":   ")
         while roaddict[int(input4)].claimedby != playerdict1[n].color:
             if roaddict[int(input4)].claimedby == "":
                 roaddict[int(input4)].claimbypass(playerdict1[n].color)
             else:
                 print("Please select an empty road")
-                input4 = input("Please place your first road, " + playerdict1[n].name + ":   ") 
+                input4 = input("Please place your second road, " + playerdict1[n].name + ":   ") 
     else:
         input4 = input("Please place your second settlement, " + playerdict1[n].name + ":   ")
         while nodedict[int(input4)].claimedby != playerdict1[n].color or howmanynodes(playerdict1[n].color) < 2:
@@ -1011,7 +1013,7 @@ def initializepart2(n):
                 roaddict[int(input4)].claimbypass(playerdict1[n].color)
             else:
                 print("Please select an second road")
-                input4 = input("Please place your first road, " + playerdict1[n].name + ":   ") 
+                input4 = input("Please place your second road, " + playerdict1[n].name + ":   ") 
         initializepart2(n-1)
       
 def howmanynodes(color):
@@ -1035,10 +1037,29 @@ def move_hamburglar():
         relevant_var = hamburglar_newloc - 1
         robber_loc = False
         clusters[relevant_var].isrobber = True
-        
+"""        
 InitialHexTriggerRandomizer()
 InitialHexResourceRandomizer()
 ClusterToNode()
 playerinput(play())
 initialize(int(numplayers))
 initializepart2(int(numplayers))
+"""
+def debugbypass():
+    global P1
+    global P2
+    global P3
+    global P4
+    global playerdict
+    global playerdict1
+    P1 = Player("Carter", "Blue", 4)
+    P2 = Player("Mikol", "Red", 3)
+    P3 = Player("Peter", "Brown", 2)
+    P4 = Player("John", "Green", 1)
+    playerdict = {4 : P1, 3: P2, 2: P3, 1 : P4}
+    playerdict1 = {1 : P1, 2 : P2, 3 : P3, 4 : P4}
+    InitialHexTriggerRandomizer()
+    InitialHexResourceRandomizer()
+    ClusterToNode()
+    
+    
