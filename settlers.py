@@ -1,69 +1,6 @@
 #Settlers of Catan
 import random
 ##import pygame
-
-
-def ptsd():
-    global trigger
-    trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
-    
-types = ["bread", "sauce", "cheese", "ham", "pepperoni"]
-
-def play():
-    input1 = input("How Many Players?:   ")
-    ##numplayers = input1
-    return str(input1)
-
-##numplayers = 0
-colors = ['red', 'blue', 'white', 'orange', 'green', 'brown']
-playernames = [] 
-playercolor = [] 
-playerposition = []
-
-
-turn = 1
-
-def init():
-    global P1
-    global P2
-    global P3
-    global P4
-    if len(playercolor) == 4:
-        P4 = Player(playernames[0], playercolor[0], playerposition[0])
-        P3 = Player(playernames[1], playercolor[1], playerposition[1])
-        P2 = Player(playernames[2], playercolor[2], playerposition[2])
-        P1 = Player(playernames[3], playercolor[3], playerposition[3])
-    elif len(playercolor) == 3:
-        P3 = Player(playernames[0], playercolor[0], playerposition[0])
-        P2 = Player(playernames[1], playercolor[1], playerposition[1])
-        P1 = Player(playernames[2], playercolor[2], playerposition[2])
-    elif len(playercolor) == 2:
-        P2 = Player(playernames[0], playercolor[0], playerposition[0])
-        P1 = Player(playernames[1], playercolor[1], playerposition[1])
-        
-        #STOP
-           
-def playerinput(string):
-    global playernames
-    global colors
-    if int(string) == 1:
-        playernames.append(input("Enter Player " + string + " Name:   "))
-        m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
-        while colors.count(m) != 1 or playercolor.count(m) > 0:
-            m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
-        playercolor.append(m) 
-        playerposition.append(int(string))
-        init()
-    else:
-        playernames.append(input("Enter Player " + string + " Name:   "))
-        m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
-        while colors.count(m) != 1 or playercolor.count(m) > 0:
-            m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
-        playercolor.append(m) 
-        playerposition.append(int(string))
-        playerinput(str(int(string) - 1))
-
-        
 class Player:
     def __init__(self, name, color, position):
         self.name = name
@@ -79,6 +16,19 @@ class Player:
         self.special = []
         self.nodes = []
         self.roads = []
+
+    def payoff(self):
+        if clusters.trigger == trigger:
+                if clusters.resource == "ham":
+                    self.resources['ham'] += 1
+                elif clusters.resource == "pineapple":
+                    self.resources['pineapple'] += 1
+                elif clusters.resource == "bread":
+                    self.resources['bread'] += 1
+                elif clusters.resource == "cheese":
+                    self.resources['cheese'] += 1
+                elif clusters.resource == "sauce":
+                    self.resources['sauce'] += 1
     
     def claimnode(self, node): # Needs finishing
         if node == 1:
@@ -443,34 +393,7 @@ class Player:
             node53.makecity(self.color)
         elif node == 54:
             node54.makecity(self.color)
-        
-            
-            
-    
-        
 
-
-
-
-class DevelopmentCard:
-
-    devtype = ["delivery", "progress", "pizza"]
-
-    def __init__(self, devtype):
-        self.devtype = devtype
-
-class ProgressCard:
-
-    protype = ["road", "extra", "yoink"]
-
-    def __init__(self, protype):
-        self.protype = protype
-
-
-#class Card:
- #   def __init__(self, resource, 
-
-#54 nodes
 class Node:
     def __init__(self, id, claimed = False, iscity = False):
         self.id = id
@@ -494,24 +417,37 @@ class Node:
     def makecity(self, color):
         if cancity(self, color) == True:
             self.iscity = True 
-        
-
+            
+class Road:
+    def __init__(self, claimed = False):
+        self.claimed = claimed
+        self.nodes = []
+        self.claimedby = ""
     
-   # def res_calc(self, resource):
-    #    if resource == usedResources[i]:#variable here which will be from the map generator that will match triggers to resources
-     #       if comment_var == "ham":
-      #          Player.resources['ham'] += 1
-        #    elif comment_var == "pineapple":
-         #       Player.resources['pineapple'] += 1
-          #  elif comment_var == "bread":
-           #     Player.resources['bread'] += 1
-            #elif comment_var == "cheese":
-             #   Player.resources['cheese'] += 1
-            #elif comment_var == "sauce":
-             #   Player.resources['sauce'] += 1
+    def claim(self, color):
+        if canclaimroad(self, color) == True:
+            self.claimed = True
+            self.claimedby = color
+        else:
+            print("Can't claim")
 
-    #def isroad():
-     #   if road_button == pressed #button to make roads is clicked
+    def claimbypass(self, color):
+        self.claimed = True
+        self.claimedby = color
+            
+class Cluster:
+    def __init__(self, isrobber = False):
+        self.resource = ""
+        self.roads = []
+        self.isrobber = isrobber
+        self.tempresource = ""
+        self.trigger = ""
+
+
+
+def ptsd():
+    global trigger
+    trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 node1 = Node(1)
 node2 = Node(2)
@@ -566,25 +502,7 @@ node50 = Node(50)
 node51 = Node(51)
 node52 = Node(52)
 node53 = Node(53)
-node54 = Node(54)
-
-class Road:
-    def __init__(self, claimed = False):
-        self.claimed = claimed
-        self.nodes = []
-        self.claimedby = ""
-    
-    def claim(self, color):
-        if canclaimroad(self, color) == True:
-            self.claimed = True
-            self.claimedby = color
-        else:
-            print("Can't claim")
-
-    def claimbypass(self, color):
-        self.claimed = True
-        self.claimedby = color
-            
+node54 = Node(54)    
 road0 = Road()
 road0.nodes = [node4, node1]
 road1 = Road()
@@ -729,16 +647,123 @@ road70 = Road()
 road70.nodes = [node33, node38]
 road71 = Road()
 road71.nodes = [node44, node39]
+Cluster1 = Cluster()
+Cluster2 = Cluster()
+Cluster3 = Cluster()
+Cluster4 = Cluster()
+Cluster5 = Cluster()
+Cluster6 = Cluster()
+Cluster7 = Cluster()
+Cluster8 = Cluster()
+Cluster9 = Cluster()
+Cluster10 = Cluster()
+Cluster11 = Cluster()
+Cluster12 = Cluster()
+Cluster13 = Cluster()
+Cluster14 = Cluster()
+Cluster15 = Cluster()
+Cluster16 = Cluster()
+Cluster17 = Cluster()
+Cluster18 = Cluster()
+Cluster19 = Cluster()
+
+
+clusters = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
+Roads = [road1, road2, road3, road4, road5, road6, road7, road8, road9, road10, road11, road12, road13, road14, road15, road16, road17, road18, road19, road20, road21, road22, road23, road24, road25, road26, road27, road28, road29, road30, road31, road32, road33, road34, road35, road36, road37, road38, road39, road40, road41, road42, road43, road44, road45, road46, road47, road48, road49, road50, road51, road52, road53, road54, road55, road56, road57, road58, road59, road60, road61, road62, road63, road64, road65, road66, road67, road68, road69, road70, road71]
+Nodes = [node1, node2, node3, node4, node5, node6, node7, node8, node9, node10, node11, node12, node13, node14, node15, node16, node17, node18, node19, node20, node21, node22, node23, node24, node25, node26, node27, node28, node29, node30, node31, node32, node33, node34, node35, node36, node37, node38, node39, node40, node41, node42, node43, node44, node45, node46, node47, node48, node49, node50, node51, node52, node53, node54]
 
 
 
-class Cluster:
-    def __init__(self, isrobber = False):
-        self.resource = ""
-        self.roads = []
-        self.isrobber = isrobber
-        self.tempresource = ""
-        self.trigger = ""
+    
+types = ["bread", "sauce", "cheese", "ham", "pepperoni"]
+
+def play():
+    input1 = input("How Many Players?:   ")
+    ##numplayers = input1
+    return str(input1)
+
+##numplayers = 0
+colors = ['red', 'blue', 'white', 'orange', 'green', 'brown']
+playernames = [] 
+playercolor = [] 
+playerposition = []
+
+
+
+turn = 1
+
+def init():
+    global P1
+    global P2
+    global P3
+    global P4
+    if len(playercolor) == 4:
+        P4 = Player(playernames[0], playercolor[0], playerposition[0])
+        P3 = Player(playernames[1], playercolor[1], playerposition[1])
+        P2 = Player(playernames[2], playercolor[2], playerposition[2])
+        P1 = Player(playernames[3], playercolor[3], playerposition[3])
+    elif len(playercolor) == 3:
+        P3 = Player(playernames[0], playercolor[0], playerposition[0])
+        P2 = Player(playernames[1], playercolor[1], playerposition[1])
+        P1 = Player(playernames[2], playercolor[2], playerposition[2])
+    elif len(playercolor) == 2:
+        P2 = Player(playernames[0], playercolor[0], playerposition[0])
+        P1 = Player(playernames[1], playercolor[1], playerposition[1])
+        
+        #STOP
+           
+def playerinput(string):
+    global playernames
+    global colors
+    if int(string) == 1:
+        playernames.append(input("Enter Player " + string + " Name:   "))
+        m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
+        while colors.count(m) != 1 or playercolor.count(m) > 0:
+            m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
+        playercolor.append(m) 
+        playerposition.append(int(string))
+        init()
+    else:
+        playernames.append(input("Enter Player " + string + " Name:   "))
+        m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
+        while colors.count(m) != 1 or playercolor.count(m) > 0:
+            m = str(input("Enter Player " + string + " Color (Blue, Red, White, Orange, Green, or Brown):   ")).lower()
+        playercolor.append(m) 
+        playerposition.append(int(string))
+        playerinput(str(int(string) - 1))
+"""
+class DevelopmentCard:
+
+    devtype = ["delivery", "progress", "pizza"]
+
+    def __init__(self, devtype):
+        self.devtype = devtype
+
+class ProgressCard:
+
+    protype = ["road", "extra", "yoink"]
+
+    def __init__(self, protype):
+        self.protype = protype
+"""
+
+
+    
+#class Card:
+ #   def __init__(self, resource, 
+
+
+        
+
+
+
+
+            
+
+
+
+
+
 
 Cluster1 = Cluster()
 Cluster1.roads = [road0, road6, road11, road12, road7, road1]
@@ -850,7 +875,7 @@ usedID = []
 IDGenned = []
 
 def InitialHexTriggerRandomizer():
-    while Cluster18.trigger == "":
+    while len(IDGenned) == 18:
         if len(usedID) < 18:            
             IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
             if IDGenVar == 2:
@@ -952,8 +977,8 @@ def ClusterToNode():
         for road in cluster.roads:
             for node in road.nodes:
                 node.resource.append(cluster.resource)
-                node.isrobber = cluster.isrobber
-                hamburglar()
+                #node.isrobber = cluster.isrobber
+                #hamburglar()
                 #if clusters.isrobber == True:
                 #    robber_loc = node                
             temp = []
@@ -970,6 +995,7 @@ def ClusterToNode():
             elif node.resource.count("desert") == 2:
                 temp.append("desert")
             node.resource = temp
+               
 
     
         
@@ -1050,12 +1076,12 @@ def build(): #Needs to be finished
             
             
 def hamburglar():
-    if clusters.isrobber == True:
-        clusters.tempresource = clusters.resource
-        clusters.resource = ""
-    if clusters.isrobber == False:
-        if clusters.resource == "":
-            clusters.resource = clusters.tempresource            
+    if cluster.isrobber == True:
+        cluster.tempresource = clusters.resource
+        cluster.resource = ""
+    if cluster.isrobber == False:
+        if cluster.resource == "":
+            cluster.resource = clusters.tempresource            
 
 def move_hamburglar():
     if trigger == 7:
