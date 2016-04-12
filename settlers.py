@@ -1020,9 +1020,6 @@ def howmanynodes(color):
         if node.claimedby == color:
             a = a + 1
     return a
-      
-
-            
             
 def hamburglar():
     if cluster.isrobber == True:
@@ -1043,3 +1040,5 @@ InitialHexTriggerRandomizer()
 InitialHexResourceRandomizer()
 ClusterToNode()
 playerinput(play())
+initialize(int(numplayers))
+initializepart2(int(numplayers))
