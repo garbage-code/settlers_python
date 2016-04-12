@@ -29,7 +29,54 @@ Line 951 - 1022: Initialization Functions
 Line 1024 - 1041: Robber
 """
 
+class Node:
+    def __init__(self, id, claimed = False, iscity = False):
+        self.id = id
+        self.resource = []
+        self.claimed = claimed
+        self.claimedby = ""
+        self.iscity = iscity 
+    
+    def claim(self, color):   #Need to only allow if certain color is other one
+        if canclaim(self, color) == True:
+            self.claimed = True
+            self.claimedby = color
+        else:
+            print("Can't claim")
+        
+    
+    def claimbypass(self, color):
+        self.claimed = True
+        self.claimedby = color
+    
+    def makecity(self, color):
+        if cancity(self, color) == True:
+            self.iscity = True 
+            
+class Road:
+    def __init__(self, nodes, claimed = False):
+        self.claimed = claimed
+        self.nodes = []
+        self.claimedby = ""
+    
+    def claim(self, color):
+        if canclaimroad(self, color) == True:
+            self.claimed = True
+            self.claimedby = color
+        else:
+            print("Can't claim")
 
+    def claimbypass(self, color):
+        self.claimed = True
+        self.claimedby = color
+            
+class Cluster:
+    def __init__(self, roads, isrobber = False):
+        self.resource = ""
+        self.roads = []
+        self.isrobber = isrobber
+        self.tempresource = ""
+        self.trigger = ""
 node1 = Node(1)
 node2 = Node(2)
 node3 = Node(3)
@@ -575,54 +622,7 @@ class Player:
         elif node == 54:
             node54.makecity(self.color)
 
-class Node:
-    def __init__(self, id, claimed = False, iscity = False):
-        self.id = id
-        self.resource = []
-        self.claimed = claimed
-        self.claimedby = ""
-        self.iscity = iscity 
-    
-    def claim(self, color):   #Need to only allow if certain color is other one
-        if canclaim(self, color) == True:
-            self.claimed = True
-            self.claimedby = color
-        else:
-            print("Can't claim")
-        
-    
-    def claimbypass(self, color):
-        self.claimed = True
-        self.claimedby = color
-    
-    def makecity(self, color):
-        if cancity(self, color) == True:
-            self.iscity = True 
-            
-class Road:
-    def __init__(self, nodes, claimed = False):
-        self.claimed = claimed
-        self.nodes = []
-        self.claimedby = ""
-    
-    def claim(self, color):
-        if canclaimroad(self, color) == True:
-            self.claimed = True
-            self.claimedby = color
-        else:
-            print("Can't claim")
 
-    def claimbypass(self, color):
-        self.claimed = True
-        self.claimedby = color
-            
-class Cluster:
-    def __init__(self, roads, isrobber = False):
-        self.resource = ""
-        self.roads = []
-        self.isrobber = isrobber
-        self.tempresource = ""
-        self.trigger = ""
 
 
 
@@ -1021,8 +1021,7 @@ def howmanynodes(color):
             a = a + 1
     return a
       
-initialize(int(numplayers))
-initializepart2(int(numplayers))
+
             
             
 def hamburglar():
