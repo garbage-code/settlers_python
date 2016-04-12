@@ -13,20 +13,20 @@ Line 159: Beginning of Cluster invocations
 Line 177: End of cluster invocations
 Line 178-182: Lists of clusters, roads, and nodes
 Line 183: Player Class
-Line 576: Node Class
-Line 600: Road Class
-Line 617: Cluster Class
-Line 627: Roller function
-Line 633: Startup function
-Line 649: Initialize Function
-Line 675: Player Input Function
-Line 697: Hex Resource Randomizer Function
-Line 765: Hex Trigger Randomizer Function
-Line 858: Cluster to Node Distributor Function
-Line 883 - 912: Verifier functions:
-Line 913: Build Function
-Line 949 - 996: Initialization Functions
-Line 999 - 1012: Robber
+Line 578: Node Class
+Line 602: Road Class
+Line 619: Cluster Class
+Line 629: Roller function
+Line 635: Startup function
+Line 651: Initialize Function
+Line 677: Player Input Function
+Line 699: Hex Resource Randomizer Function
+Line 767: Hex Trigger Randomizer Function
+Line 860: Cluster to Node Distributor Function
+Line 885 - 914: Verifier functions:
+Line 916: Build Function
+Line 951 - 1022: Initialization Functions
+Line 1024 - 1041: Robber
 """
 
 
@@ -957,6 +957,13 @@ def initialize(n):
             else:
                 print("Please select an empty vertice")
                 input4 = input("Please place your first settlement, " + playerdict[n].name + ":   ")
+        input4 = input("Please place your first road, " + playerdict[n].name + ":   ")
+        while roaddict[int(input4)].claimedby != playerdict[n].color:
+            if roaddict[int(input4)].claimedby == "":
+                roaddict[int(input4)].claimbypass(playerdict[n].color)
+            else:
+                print("Please select an empty road")
+                input4 = input("Please place your first road, " + playerdict[n].name + ":   ")    
     else:
         input4 = input("Please place your first settlement, " + playerdict[n].name + ":   ")
         while nodedict[int(input4)].claimedby != playerdict[n].color:
@@ -965,7 +972,13 @@ def initialize(n):
             else:
                 print("Please select an empty vertice")
                 input4 = input("Please place your first settlement, " + playerdict[n].name + ":   ")
-
+        input4 = input("Please place your first road, " + playerdict[n].name + ":   ")
+        while roaddict[int(input4)].claimedby != playerdict[n].color:
+            if roaddict[int(input4)].claimedby == "":
+                roaddict[int(input4)].claimbypass(playerdict[n].color)
+            else:
+                print("Please select an empty road")
+                input4 = input("Please place your first road, " + playerdict[n].name + ":   ") 
         initialize(n-1)
         
 def initializepart2(n):
@@ -977,6 +990,13 @@ def initializepart2(n):
             else:
                 print("Please select an empty vertex")
                 input4 = input("Please place your second settlement, " + playerdict1[n].name + ":   ")
+        input4 = input("Please place your first road, " + playerdict1[n].name + ":   ")
+        while roaddict[int(input4)].claimedby != playerdict1[n].color:
+            if roaddict[int(input4)].claimedby == "":
+                roaddict[int(input4)].claimbypass(playerdict1[n].color)
+            else:
+                print("Please select an empty road")
+                input4 = input("Please place your first road, " + playerdict1[n].name + ":   ") 
     else:
         input4 = input("Please place your second settlement, " + playerdict1[n].name + ":   ")
         while nodedict[int(input4)].claimedby != playerdict1[n].color or howmanynodes(playerdict1[n].color) < 2:
@@ -985,6 +1005,13 @@ def initializepart2(n):
             else:
                 print("Please select an empty vertex")
                 input4 = input("Please place your second settlement, " + playerdict1[n].name + ":   ")
+        input4 = input("Please place your second road, " + playerdict[n].name + ":   ")
+        while roaddict[int(input4)].claimedby != playerdict1[n].color:
+            if roaddict[int(input4)].claimedby == "":
+                roaddict[int(input4)].claimbypass(playerdict1[n].color)
+            else:
+                print("Please select an second road")
+                input4 = input("Please place your first road, " + playerdict1[n].name + ":   ") 
         initializepart2(n-1)
       
 def howmanynodes(color):
