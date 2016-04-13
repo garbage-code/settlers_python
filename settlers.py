@@ -628,13 +628,6 @@ class Player:
         elif node == 54:
             node54.makecity(self.color)
 
-
-
-
-
-
-
-
 def play():
     global numplayers
     input1 = input("How Many Players?:   ")
@@ -651,6 +644,8 @@ playerposition = []
 
 turn = 1
 
+            
+    
 def init():
     global P1
     global P2
@@ -697,6 +692,21 @@ def playerinput(string):
         playerposition.append(int(string))
         playerinput(str(int(string) - 1))
 
+movelog = open("playerlog.txt", "w")
+def turns():
+    global turn
+    roller()
+    for place, obj in playerdict1.items():
+        obj.payoff()
+        obj.trade()
+        build()
+        #playDevCard()
+        turn += 1
+    turns()
+            
+        
+        
+        
 usedResources = []
 
 def InitialHexResourceRandomizer():
