@@ -865,10 +865,10 @@ def ClusterToNode():
         for road in cluster.roads:
             for node in road.nodes:
                 node.resource.append(cluster.resource)
-                #node.isrobber = cluster.isrobber
-                #hamburglar()
-                #if clusters.isrobber == True:
-                #    robber_loc = node                
+                node.isrobber = cluster.isrobber
+                hamburglar()
+                if cluster.isrobber == True:
+                    robber_loc = node                
             temp = []
             if node.resource.count("ham") == 2:
                 temp.append("ham")
