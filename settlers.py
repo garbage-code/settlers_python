@@ -533,33 +533,113 @@ def build(): #Needs to be finished
     if input2 == "Pizza Hut":
         input3 = input("Where would you like to to place this?  ")
         if turn == 1:
-            P1.claimnode(int(input3))
+            if P1.resources['bread'] >= 1 and P1.resources['cheese'] >= 1 and P1.resources['pineapple'] >= 1 and P1.resources['sauce'] >= 1:
+                P1.claimnode(int(input3))
+                P1.resources['bread'] -= 1
+                P1.resources['cheese'] -= 1
+                P1.resources['pineapple'] -= 1
+                P1.resources['sauce'] -= 1
+            else:
+                print(P1.name, ", you don't enough resources for that!")
+                build()
         if turn == 2:
-            P2.claimnode(int(input3))
+            if P2.resources['bread'] >= 1 and P2.resources['cheese'] >= 1 and P2.resources['pineapple'] >= 1 and P2.resources['sauce'] >= 1:
+                P2.claimnode(int(input3))
+                P2.resources['bread'] -= 1
+                P2.resources['cheese'] -= 1
+                P2.resources['pineapple'] -= 1
+                P2.resources['sauce'] -= 1
+            else:
+                print(P2.name, ", you don't have enough resources for that!")
+                build()
         if turn == 3:
-            P3.claimnode(int(input3))
+            if P3.resources['bread'] >= 1 and P3.resources['cheese'] >= 1 and P3.resources['pineapple'] >= 1 and P3.resources['sauce'] >= 1:
+                P3.claimnode(int(input3))
+                P3.resources['bread'] -= 1
+                P3.resources['cheese'] -= 1
+                P3.resources['pineapple'] -= 1
+                P3.resources['sauce'] -= 1
+            else:
+                print(P3.name, ", you don't have enough resources for that!")
+                build()
         if turn == 4:
-            P4.claimnode(int(input3))
+            if P4.resources['bread'] >= 1 and P4.resources['cheese'] >= 1 and P4.resources['pineapple'] >= 1 and P4.resources['sauce'] >= 1:
+                P4.claimnode(int(input3))
+                P4.resources['bread'] -= 1
+                P4.resources['cheese'] -= 1
+                P4.resources['pineapple'] -= 1
+                P4.resources['sauce'] -= 1
+            else:
+                print(P4.name, ", you don't have enough resources for that!")
+                build()
     if input2 == "Road":
         input3 = input("Where would you like to to place this?  ")
         if turn == 1:
-            P1.claimroad(int(input3))
+            if P1.resources['pineapple'] >= 1 and P1.resources['cheese'] >= 1:
+                P1.claimroad(int(input3))
+                P1.resources['pineapple'] -= 1
+                P1.resources['cheese'] -= 1
+            else:
+                print(P1.name, ", you don't have enough resources for that!")
+                build()
         if turn == 2:
-            P2.claimroad(int(input3))
+            if P2.resources['pineapple'] >= 1 and P2.resources['cheese'] >= 1:
+                P2.claimroad(int(input3))
+                P2.resources['pineapple'] -= 1
+                P2.resources['cheese'] -= 1
+            else:
+                print(P2.name, ", you don't have enough resources for that!")
+                build()
         if turn == 3:
-            P3.claimroad(int(input3))
+            if P3.resources['pineapple'] >= 1 and P3.resources['cheese'] >= 1:
+                P3.claimroad(int(input3))
+                P3.resources['pineapple'] -= 1
+                P3.resources['cheese'] -= 1
+            else:
+                print(P3.name, ", you don't have enough resources for that!")
+                build()
         if turn == 4:
-            P4.claimroad(int(input3))
+            if P4.resources['pineapple'] >= 1 and P4.resources['cheese'] >= 1:
+                P4.claimroad(int(input3))
+                P4.resources['pineapple'] -= 1
+                P4.resources['cheese'] -= 1
+            else:
+                print(P4.name, ", you don't have enough resources for that!")
+                build()
     if input2 == "Papa Johns":
         input3 = input("Where would you like to to place this?  ")
         if turn == 1:
-            P1.makepapa(int(input3))
+            if P1.resources['ham'] >= 3 and P1.resources['bread'] >= 2:
+                P1.makepapa(int(input3))
+                P1.resources['ham'] -= 3
+                P1.resources['cheese'] -= 2
+            else:
+                print(P1.name, ", you don't have enough resources for that!")
+                build()
         if turn == 2:
-            P2.makepapa(int(input3))
+            if P2.resources['ham'] >= 3 and P2.resources['bread'] >= 2:
+                P2.makepapa(int(input3))
+                P2.resources['ham'] -= 3
+                P2.resources['cheese'] -= 3
+            else:
+                print(P2.name, ", you don't have enough resources for that!")
+                build()
         if turn == 3:
-            P3.makepapa(int(input3))
+            if P3.resources['ham'] >= 3 and P3.resources['bread'] >= 2:
+                P3.makepapa(int(input3))
+                P3.resources['ham'] -= 3
+                P3.resources['bread'] -= 2
+            else:
+                print(P3.name, ", you don't have enough resources for that!")
+                build()
         if turn == 4:
-            P4.makepapa(int(input3))
+            if P4.resources['ham'] >= 3 and P4.resources['bread'] >= 2:
+                P4.makepapa(int(input3))
+                P4.resources['ham'] -= 3
+                P4.resources['bread'] -= 2
+            else:
+                print(P4.name, ", you don't have enough resources for that!")
+                build()
 
 def initialize(n):
     if n == 1:
