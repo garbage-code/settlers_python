@@ -641,6 +641,52 @@ def build(): #Needs to be finished
                 print(P4.name, ", you don't have enough resources for that!")
                 build()
 
+def trade():
+    global turn
+    input5 = ""
+    input6 = ""
+    input10 = ""
+    input11 = ""
+    while validresource(input5) == False:
+        input5 = input("What resource do you wish to offer?   ")
+    while validresource(input6) == False:
+        input6 = input("What resource do you wish to receive?   ")
+    input7 = input("How many " + input5 + " do you wish to offer?   ")
+    input8 = input("How many " + input6 + " do you wish to receive?   ")
+    input9 = input("Would you like to add another resource to your offer? (yes / no)   ")
+    while input9.lower() != "yes" and input9.lower() != "no":
+        input9 = input("Would you like to add another resource to your offer? (yes / no)   ")
+    if input9.lower() == "yes":
+        while validresource(input10) == False:
+            input10 = input("What second resource do you wish to offer?   ")
+        while validresource(input11) == False:
+            input11 = input("What second resource do you wish to receive?   ")
+        input12 = input("How many " + input10 + " do you wish to offer?   ")
+        input13 = input("How many " + input11 + " do you wish to receive?   ")
+        if turn == 1:
+            P1.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
+        elif turn == 2:
+            P2.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
+        elif turn == 3:
+            P3.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
+        elif turn == 4:
+            P4.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
+    elif input9.lower() == "no": #FIX
+        if turn == 1:
+            P1.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+        elif turn == 2:
+            P2.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+        elif turn == 3:
+            P3.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+        elif turn == 4:
+            P4.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+
+def validresource(a):
+    if a.lower() == "ham" or a.lower() == "pineapple" or a.lower() == "sauce" or a.lower() == "bread" or  a.lower() == "cheese":
+        return True
+    else:
+        return False
+
 def initialize(n):
     if n == 1:
         input4 = input("Please place your first settlement, " + playerdict[n].name + ":   ")
