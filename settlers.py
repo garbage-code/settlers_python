@@ -54,8 +54,8 @@ class Node:
             self.iscity = True 
             
 class Road:
-    def __init__(self, nodes, claimed = False):
-        self.claimed = claimed
+    def __init__(self, nodes = []):
+        self.claimed = False
         self.nodes = []
         self.claimedby = ""
     
@@ -71,12 +71,13 @@ class Road:
         self.claimedby = color
             
 class Cluster:
-    def __init__(self, roads, isrobber = False):
+    def __init__(self, isrobber = False):
+        self.id = ""        
         self.resource = ""
         self.roads = []
         self.isrobber = isrobber
         self.tempresource = ""
-        self.trigger = ""
+        self.trigger = 0
         
 def roller():
     global trigger
@@ -88,97 +89,207 @@ for i in range(54):
     Nodes.append(Node(i+1))
     
 
-road0 = Road([Nodes[3], Nodes[0]])
-road1 = Road([Nodes[0], Nodes[4]])
-road2 = Road([Nodes[4], Nodes[1]])
-road3 = Road([Nodes[1], Nodes[5]])
-road4 = Road([Nodes[5], Nodes[2]])
-road5 = Road([Nodes[2], Nodes[6]])
-road6 = Road([Nodes[3], Nodes[7]])
-road7 = Road([Nodes[4], Nodes[8]])
-road8 = Road([Nodes[5], Nodes[9]])
-road9 = Road([Nodes[6], Nodes[10]])
-road10 = Road([Nodes[11], Nodes[7]])
-road11 = Road([Nodes[7], Nodes[12]])
-road12 = Road([Nodes[12], Nodes[8]])
-road13 = Road([Nodes[8], Nodes[13]])
-road14 = Road([Nodes[13], Nodes[9]])
-road15 = Road([Nodes[9], Nodes[14]])
-road16 = Road([Nodes[14], Nodes[10]])
-road17 = Road([Nodes[10], Nodes[15]])
-road18 = Road([Nodes[11], Nodes[16]])
-road19 = Road([Nodes[12], Nodes[17]])
-road20 = Road([Nodes[13], Nodes[18]])
-road21 = Road([Nodes[14], Nodes[19]])
-road22 = Road([Nodes[15], Nodes[20]])
-road23 = Road([Nodes[21], Nodes[16]])
-road24 = Road([Nodes[16], Nodes[22]])
-road25 = Road([Nodes[22], Nodes[17]])
-road26 = Road([Nodes[17], Nodes[23]])
-road27 = Road([Nodes[23], Nodes[18]])
-road28 = Road([Nodes[18], Nodes[24]])
-road29 = Road([Nodes[24], Nodes[19]])
-road30 = Road([Nodes[19], Nodes[25]])
-road31 = Road([Nodes[25], Nodes[20]])
-road32 = Road([Nodes[20], Nodes[26]])
-road33 = Road([Nodes[21], Nodes[27]])
-road34 = Road([Nodes[22], Nodes[28]])
-road35 = Road([Nodes[23], Nodes[29]])
-road36 = Road([Nodes[24], Nodes[30]])
-road37 = Road([Nodes[25], Nodes[31]])
-road38 = Road([Nodes[26], Nodes[32]])
-road39 = Road([Nodes[27], Nodes[33]])
-road40 = Road([Nodes[33], Nodes[28]])
-road41 = Road([Nodes[28], Nodes[34]])
-road42 = Road([Nodes[34], Nodes[29]])
-road43 = Road([Nodes[29], Nodes[35]])
-road44 = Road([Nodes[35], Nodes[30]])
-road45 = Road([Nodes[30], Nodes[36]])
-road46 = Road([Nodes[36], Nodes[31]])
-road47 = Road([Nodes[31], Nodes[37]])
-road48 = Road([Nodes[33], Nodes[38]])
-road49 = Road([Nodes[34], Nodes[39]])
-road50 = Road([Nodes[35], Nodes[40]])
-road51 = Road([Nodes[36], Nodes[41]])
-road52 = Road([Nodes[37], Nodes[42]])
-road53 = Road([Nodes[43], Nodes[39]])
-road54 = Road([Nodes[39], Nodes[44]])
-road55 = Road([Nodes[44], Nodes[40]])
-road56 = Road([Nodes[40], Nodes[45]])
-road57 = Road([Nodes[45], Nodes[41]])
-road58 = Road([Nodes[41], Nodes[46]])
-road59 = Road([Nodes[46], Nodes[42]])
-road60 = Road([Nodes[43], Nodes[47]])
-road61 = Road([Nodes[44], Nodes[48]])
-road62 = Road([Nodes[45], Nodes[49]])
-road63 = Road([Nodes[46], Nodes[50]])
-road64 = Road([Nodes[47], Nodes[51]])
-road65 = Road([Nodes[51], Nodes[48]])
-road66 = Road([Nodes[48], Nodes[52]])
-road67 = Road([Nodes[52], Nodes[49]])
-road68 = Road([Nodes[49], Nodes[53]])
-road69 = Road([Nodes[53], Nodes[50]])
-road70 = Road([Nodes[32], Nodes[37]])
-road71 = Road([Nodes[43], Nodes[38]])
-Cluster1 = Cluster([road0, road6, road11, road12, road7, road1])
-Cluster2 = Cluster([road3, road8, road14, road13, road7, road2])
-Cluster3 = Cluster([road5, road9, road16, road15, road8, road4])
-Cluster4 = Cluster([road11, road19, road25, road24, road18, road10])
-Cluster5 = Cluster([road13, road20, road27, road26, road19, road12])
-Cluster6 = Cluster([road15, road21, road29, road28, road20, road14])
-Cluster7 = Cluster([road17, road22, road31, road30, road21, road16])
-Cluster8 = Cluster([road24, road34, road40, road39, road33, road23])
-Cluster9 = Cluster([road26, road35, road42, road41, road34, road25])
-Cluster10 = Cluster([road28, road36, road44, road43, road35, road27])
-Cluster11 = Cluster([road30, road37, road46, road45, road36, road29])
-Cluster12 = Cluster([road32, road38, road70, road47, road37, road31])
-Cluster13 = Cluster([road41, road49, road53, road71, road48, road40])
-Cluster14 = Cluster([road43, road50, road55, road54, road49, road42])
-Cluster15 = Cluster([road45, road51, road57, road56, road50, road44])
-Cluster16 = Cluster([road47, road52, road59, road58, road52, road46])
-Cluster17 = Cluster([road54, road61, road65, road64, road60, road53])
-Cluster18 = Cluster([road56, road62, road67, road66, road61, road66])
-Cluster19 = Cluster([road58, road63, road69, road68, road62, road57])
+road0 = Road()
+road0.nodes = [Nodes[3], Nodes[0]]
+road1 = Road()
+road1.nodes = [Nodes[0], Nodes[4]]
+road2 = Road()
+road2.nodes = [Nodes[4], Nodes[1]]
+road3 = Road()
+road3.nodes = [Nodes[1], Nodes[5]]
+road4 = Road()
+road4.nodes = [Nodes[5], Nodes[2]]
+road5 = Road()
+road5.nodes = [Nodes[2], Nodes[6]]
+road6 = Road()
+road6.nodes = [Nodes[3], Nodes[7]]
+road7 = Road()
+road7.nodes = [Nodes[4], Nodes[8]]
+road8 = Road()
+road8.nodes = [Nodes[5], Nodes[9]]
+road9 = Road()
+road9.nodes = [Nodes[6], Nodes[10]]
+road10 = Road()
+road10.nodes = [Nodes[11], Nodes[7]]
+road11 = Road()
+road11.nodes = [Nodes[7], Nodes[12]]
+road12 = Road()
+road12.nodes = [Nodes[12], Nodes[8]]
+road13 = Road()
+road13.nodes = [Nodes[8], Nodes[13]]
+road14 = Road()
+road14.nodes = [Nodes[13], Nodes[9]]
+road15 = Road()
+road15.nodes = [Nodes[9], Nodes[14]]
+road16 = Road()
+road16.nodes = [Nodes[14], Nodes[10]]
+road17 = Road()
+road17.nodes = [Nodes[10], Nodes[15]]
+road18 = Road()
+road18.nodes = [Nodes[11], Nodes[16]]
+road19 = Road()
+road19.nodes = [Nodes[12], Nodes[17]]
+road20 = Road()
+road20.nodes = [Nodes[13], Nodes[18]]
+road21 = Road()
+road21.nodes = [Nodes[14], Nodes[19]]
+road22 = Road()
+road22.nodes = [Nodes[15], Nodes[20]]
+road23 = Road()
+road23.nodes = [Nodes[21], Nodes[16]]
+road24 = Road()
+road24.nodes = [Nodes[16], Nodes[22]]
+road25 = Road()
+road25.nodes = [Nodes[22], Nodes[17]]
+road26 = Road()
+road26.nodes = [Nodes[17], Nodes[23]]
+road27 = Road()
+road27.nodes = [Nodes[23], Nodes[18]]
+road28 = Road()
+road28.nodes = [Nodes[18], Nodes[24]]
+road29 = Road()
+road29.nodes = [Nodes[24], Nodes[19]]
+road30 = Road()
+road30.nodes = [Nodes[19], Nodes[25]]
+road31 = Road()
+road31.nodes = [Nodes[25], Nodes[20]]
+road32 = Road()
+road32.nodes = [Nodes[20], Nodes[26]]
+road33 = Road()
+road33.nodes = [Nodes[21], Nodes[27]]
+road34 = Road()
+road34.nodes = [Nodes[22], Nodes[28]]
+road35 = Road()
+road35.nodes = [Nodes[23], Nodes[29]]
+road36 = Road()
+road36.nodes = [Nodes[24], Nodes[30]]
+road37 = Road()
+road37.nodes = [Nodes[25], Nodes[31]]
+road38 = Road()
+road38.nodes = [Nodes[26], Nodes[32]]
+road39 = Road()
+road39.nodes = [Nodes[27], Nodes[33]]
+road40 = Road()
+road40.nodes = [Nodes[33], Nodes[28]]
+road41 = Road()
+road41.nodes = [Nodes[28], Nodes[34]]
+road42 = Road()
+road42.nodes = [Nodes[34], Nodes[29]]
+road43 = Road()
+road43.nodes = [Nodes[29], Nodes[35]]
+road44 = Road()
+road44.nodes = [Nodes[35], Nodes[30]]
+road45 = Road()
+road45.nodes = [Nodes[30], Nodes[36]]
+road46 = Road()
+road46.nodes = [Nodes[36], Nodes[31]]
+road47 = Road()
+road47.nodes = [Nodes[31], Nodes[37]]
+road48 = Road()
+road48.nodes = [Nodes[33], Nodes[38]]
+road49 = Road()
+road49.nodes = [Nodes[34], Nodes[39]]
+road50 = Road()
+road50.nodes = [Nodes[35], Nodes[40]]
+road51 = Road()
+road51.nodes = [Nodes[36], Nodes[41]]
+road52 = Road()
+road52.nodes = [Nodes[37], Nodes[42]]
+road53 = Road()
+road53.nodes = [Nodes[43], Nodes[39]]
+road54 = Road()
+road54.nodes = [Nodes[39], Nodes[44]]
+road55 = Road()
+road55.nodes = [Nodes[44], Nodes[40]]
+road56 = Road()
+road56.nodes = [Nodes[40], Nodes[45]]
+road57 = Road()
+road57.nodes = [Nodes[45], Nodes[41]]
+road58 = Road()
+road58.nodes = [Nodes[41], Nodes[46]]
+road59 = Road()
+road59.nodes = [Nodes[46], Nodes[42]]
+road60 = Road()
+road60.nodes = [Nodes[43], Nodes[47]]
+road61 = Road()
+road61.nodes = [Nodes[44], Nodes[48]]
+road62 = Road()
+road62.nodes = [Nodes[45], Nodes[49]]
+road63 = Road()
+road63.nodes = [Nodes[46], Nodes[50]]
+road64 = Road()
+road64.nodes = [Nodes[47], Nodes[51]]
+road65 = Road()
+road65.nodes = [Nodes[51], Nodes[48]]
+road66 = Road()
+road66.nodes = [Nodes[48], Nodes[52]]
+road67 = Road()
+road67.nodes = [Nodes[52], Nodes[49]]
+road68 = Road()
+road68.nodes = [Nodes[49], Nodes[53]]
+road69 = Road()
+road69.nodes = [Nodes[53], Nodes[50]]
+road70 = Road()
+road70.nodes = [Nodes[32], Nodes[37]]
+road71 = Road()
+road71.nodes = [Nodes[43], Nodes[38]]
+Cluster1 = Cluster()
+Cluster1.roads = [road0, road6, road11, road12, road7, road1]
+Cluster1.id = 1
+Cluster2 = Cluster()
+Cluster2.id = 2
+Cluster2.roads = [road3, road8, road14, road13, road7, road2]
+Cluster3 = Cluster()
+Cluster3.roads = [road5, road9, road16, road15, road8, road4]
+Cluster3.id = 3
+Cluster4 = Cluster()
+Cluster4.id = 4
+Cluster4.roads = [road11, road19, road25, road24, road18, road10]
+Cluster5 = Cluster()
+Cluster5.id = 5
+Cluster5.roads = [road13, road20, road27, road26, road19, road12]
+Cluster6 = Cluster()
+Cluster6.id = 6
+Cluster6.roads = [road15, road21, road29, road28, road20, road14]
+Cluster7 = Cluster()
+Cluster7.id = 7
+Cluster7.roads = [road17, road22, road31, road30, road21, road16]
+Cluster8 = Cluster()
+Cluster8.id = 8
+Cluster8.roads = [road24, road34, road40, road39, road33, road23]
+Cluster9 = Cluster()
+Cluster9.id = 9
+Cluster9.roads = [road26, road35, road42, road41, road34, road25]
+Cluster10 = Cluster()
+Cluster10.id = 10
+Cluster10.roads = [road28, road36, road44, road43, road35, road27]
+Cluster11 = Cluster()
+Cluster11.id = 11
+Cluster11.roads = [road30, road37, road46, road45, road36, road29]
+Cluster12 = Cluster()
+Cluster12.id = 12
+Cluster12.roads = [road32, road38, road70, road47, road37, road31]
+Cluster13 = Cluster()
+Cluster13.id = 13
+Cluster13.roads = [road41, road49, road53, road71, road48, road40]
+Cluster14 = Cluster()
+Cluster14.id = 14
+Cluster14.roads = [road43, road50, road55, road54, road49, road42]
+Cluster15 = Cluster()
+Cluster15.id = 15
+Cluster15.roads = [road45, road51, road57, road56, road50, road44]
+Cluster16 = Cluster()
+Cluster16.id = 16
+Cluster16.roads = [road47, road52, road59, road58, road52, road46]
+Cluster17 = Cluster()
+Cluster17.id = 17
+Cluster17.roads = [road54, road61, road65, road64, road60, road53]
+Cluster18 = Cluster()
+Cluster18.id = 18
+Cluster18.roads = [road56, road62, road67, road66, road61, road66]
+Cluster19 = Cluster()
+Cluster19.id = 19
+Cluster19.roads = [road58, road63, road69, road68, road62, road57]
 clusters = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
 Roads = [road0, road1, road2, road3, road4, road5, road6, road7, road8, road9, road10, road11, road12, road13, road14, road15, road16, road17, road18, road19, road20, road21, road22, road23, road24, road25, road26, road27, road28, road29, road30, road31, road32, road33, road34, road35, road36, road37, road38, road39, road40, road41, road42, road43, road44, road45, road46, road47, road48, road49, road50, road51, road52, road53, road54, road55, road56, road57, road58, road59, road60, road61, road62, road63, road64, road65, road66, road67, road68, road69, road70, road71]
 nodedict = {1 : Nodes[0], 2 : Nodes[1], 3 : Nodes[2], 4 : Nodes[3], 5 : Nodes[4], 6 : Nodes[5], 7 : Nodes[6], 8 : Nodes[7], 9 : Nodes[8], 10 : Nodes[9], 11 : Nodes[10], 12 : Nodes[11], 13 : Nodes[12], 14 : Nodes[13], 15 : Nodes[14], 16 : Nodes[15], 17 : Nodes[16], 18 : Nodes[17], 19 : Nodes[18], 20 : Nodes[19], 21 : Nodes[20], 22 : Nodes[21], 23 : Nodes[22], 24 : Nodes[23], 25 : Nodes[24], 26 : Nodes[25], 27 : Nodes[26], 28 : Nodes[27], 29 : Nodes[28], 30 : Nodes[29], 31 : Nodes[30], 32 : Nodes[31], 33 : Nodes[32], 34 : Nodes[33], 35 : Nodes[34], 36 : Nodes[35], 37 : Nodes[36], 38 : Nodes[37], 39 : Nodes[38], 40 : Nodes[39], 41 : Nodes[40], 42 : Nodes[41], 43 : Nodes[42], 44 : Nodes[43], 45 : Nodes[44], 46 : Nodes[45], 47 : Nodes[46], 48 : Nodes[47], 49 : Nodes[48], 50 : Nodes[49], 51 : Nodes[50], 52 : Nodes[51], 53 : Nodes[52], 54 : Nodes[53]}       
@@ -198,6 +309,7 @@ class Player:
         self.special = []
         self.nodes = []
         self.roads = []
+        self.knights = 0
 
     def payoff(self):
         for cluster in clusters:
@@ -227,6 +339,52 @@ class Player:
         for peyton in Nodes:
             if peyton == node:
                 peyton.makecity(self.color)
+
+class Devcard:
+    def __init__(self, variant):
+        self.variant = variant 
+        
+    def monopoly(self, color):
+        global playerlist
+        if self.variant == "monopoly":
+            colors = []
+            for i in playerlist:
+                colors.append(i.color)
+            colors.remove(color)
+            input1 = input("What resource do you want all of, you greedy swine? ")
+            while input1 != "ham" or input1 != "pineapple" or input1 != "cheese" or input1 != "sauce" or input1 != "bread":
+                input1 = input("What resource do you want all of, you greedy swine? ")
+            total = 0
+            players = playerlist.remove()
+            if color == P1.color:
+                P1.resources[input1]
+                P1.resources[input1]
+            elif i.color == P2.color:
+                P2.vp += 1
+            elif i.color == P3.color:
+                P3.vp += 1
+            else:
+                P4.vp += 1
+
+    def knight(self):
+        if self.variant == "knight":
+            hamburglar_newloc = int(input("Where would you like to move the hamburglar?"))
+            relevant_var = hamburglar_newloc - 1
+            robber_loc = False
+            clusters[relevant_var].isrobber = True
+            for cluster in clusters:
+                for road in cluster.roads:
+                    for node in road.nodes:
+                        if cluster == clusters[relevant_var]:
+                            if node.claimed == True:
+                                for player in playerlist:
+                                    if player.color == node.claimedby:
+                                        resourcetaken = random.choice(["ham", "pineapple", "bread", "sauce", "cheese"])
+                                        player.resources[resourcetaken] -= 1
+                                        Player.resources[resourcetaken] += 1
+                                        Player.knights += 1
+                                        
+                                        
 
 def play():
     global numplayers
@@ -302,7 +460,10 @@ def turns():
         obj.trade()
         build()
         #playDevCard()
-        turn += 1
+        if turn >= 4:
+            turn == 1
+        else:
+            turn += 1
     turns()
             
         
@@ -311,6 +472,7 @@ def turns():
 usedResources = []
 
 def InitialHexResourceRandomizer():
+    global desert_loc
     while len(usedResources) < 19:            
         ResourceGenVar = random.choice(["ham", "pineapple", "cheese", "sauce", "bread", "desert"])
         if ResourceGenVar == "ham":
@@ -355,6 +517,11 @@ def InitialHexResourceRandomizer():
                 InitialHexResourceRandomizer()
             if usedResources.count("desert") == 1:
                 InitialHexResourceRandomizer()
+    for cluster in clusters:
+        cluster.resource = usedResources[clusters.index(cluster)]
+        if cluster.resource == "desert":
+            cluster.trigger == 7
+    """
     Cluster1.resource = usedResources[0]
     Cluster2.resource = usedResources[1]
     Cluster3.resource = usedResources[2]
@@ -374,9 +541,10 @@ def InitialHexResourceRandomizer():
     Cluster17.resource = usedResources[16]
     Cluster18.resource = usedResources[17]
     Cluster19.resource = usedResources[18]
-            
+    """        
 usedID = []
 IDGenned = []
+
 
 def InitialHexTriggerRandomizer():
     while len(usedID) < 18:          
@@ -451,35 +619,44 @@ def InitialHexTriggerRandomizer():
                 InitialHexTriggerRandomizer()
             if usedID.count(12) >= 2:
                 InitialHexTriggerRandomizer()
-    Cluster1.trigger = IDGenned[0]
-    Cluster2.trigger = IDGenned[1]
-    Cluster3.trigger = IDGenned[2]
-    Cluster4.trigger = IDGenned[3]
-    Cluster5.trigger = IDGenned[4]
-    Cluster6.trigger = IDGenned[5]
-    Cluster7.trigger = IDGenned[6]
-    Cluster8.trigger = IDGenned[7]
-    Cluster9.trigger = IDGenned[8]
-    Cluster10.trigger = IDGenned[9]
-    Cluster11.trigger = IDGenned[10]
-    Cluster12.trigger = IDGenned[11]
-    Cluster13.trigger = IDGenned[12]
-    Cluster14.trigger = IDGenned[13]
-    Cluster15.trigger = IDGenned[14]
-    Cluster16.trigger = IDGenned[15]
-    Cluster17.trigger = IDGenned[16]
-    Cluster18.trigger = IDGenned[17]
+    for cluster in clusters:
+        if cluster.resource == 'desert':
+            cluster.trigger = 7
+        else:
+            for ID in IDGenned:
+                cluster.trigger = IDGenned[clusters.index(cluster)]
+                
 
+"""    
+    for results in IDGenned:
+        for cluster in clusters:
+            if cluster.resource == "desert":
+                cluster.trigger = 7
+            else:
+                cluster.trigger = IDGenned[results]
+"""
+
+def isNeighbor(point1, point2):
+    for road in Roads:
+        if [point1, point2] == road.nodes:
+            return True
+        if [point2, point1] == road.nodes:
+            return True
+    
 def ClusterToNode():
     global robber_loc
     for cluster in clusters:
         for road in cluster.roads:
             for node in road.nodes:
                 node.resource.append(cluster.resource)
-                node.isrobber = cluster.isrobber
-                hamburglar()
                 if cluster.isrobber == True:
-                    robber_loc = node                
+                    robber_loc = True
+                    cluster.tempresource = clusters.resource
+                    cluster.resource = ""
+                if cluster.isrobber == False:
+                    if cluster.resource == "":
+                        cluster.resource = clusters.tempresource   
+                        node.isrobber = cluster.isrobber          
             temp = []
             if node.resource.count("ham") == 2:
                 temp.append("ham")
@@ -774,9 +951,9 @@ def move_hamburglar():
         relevant_var = hamburglar_newloc - 1
         robber_loc = False
         clusters[relevant_var].isrobber = True
-"""        
-InitialHexTriggerRandomizer()
+"""
 InitialHexResourceRandomizer()
+InitialHexTriggerRandomizer()
 ClusterToNode()
 playerinput(play())
 initialize(int(numplayers))
@@ -795,8 +972,11 @@ def debugbypass():
     P4 = Player("John", "Green", 1)
     playerdict = {4 : P1, 3: P2, 2: P3, 1 : P4}
     playerdict1 = {1 : P1, 2 : P2, 3 : P3, 4 : P4}
+    InitialHexResourceRandomizer()    
     InitialHexTriggerRandomizer()
-    InitialHexResourceRandomizer()
     ClusterToNode()
     
+def trigger_debug():
+    for cluster in clusters:
+        print(cluster.resource, cluster.trigger)
     
