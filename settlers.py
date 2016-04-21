@@ -1,7 +1,6 @@
 #Settlers of Catan
 
 import random
-#import pygame
 
 """
 CODE DIRECTORY:
@@ -41,6 +40,16 @@ class Node:
         if canclaim(self, color) == True:
             self.claimed = True
             self.claimedby = color
+            for i in playerlist:
+                if i.color == color:
+                    if i.color == P1.color:
+                        P1.vp += 1
+                    elif i.color == P2.color:
+                        P2.vp += 1
+                    elif i.color == P3.color:
+                        P3.vp += 1
+                    else:
+                        P4.vp += 1
         else:
             print("Can't claim")
         
@@ -48,10 +57,30 @@ class Node:
     def claimbypass(self, color):
         self.claimed = True
         self.claimedby = color
+        for i in playerlist:
+            if i.color == color:
+                if i.color == P1.color:
+                    P1.vp += 1
+                elif i.color == P2.color:
+                    P2.vp += 1
+                elif i.color == P3.color:
+                    P3.vp += 1
+                else:
+                    P4.vp += 1
     
     def makecity(self, color):
         if cancity(self, color) == True:
             self.iscity = True 
+            for i in playerlist:
+                if i.color == color:
+                    if i.color == P1.color:
+                        P1.vp += 1
+                    elif i.color == P2.color:
+                        P2.vp += 1
+                    elif i.color == P3.color:
+                        P3.vp += 1
+                    else:
+                        P4.vp += 1
             
 class Road:
     def __init__(self, nodes = []):
@@ -310,7 +339,40 @@ class Player:
         self.nodes = []
         self.roads = []
         self.knights = 0
+        self.vp = 0
+        
+    def trade(self, r1, r2, r3, r4, amount1, amount2, amount3, amount4):
+        if amount3 == 0 and amount4 == 0:
+            print(self.name, "Wishes to trade ", amount1, r1, "for", amount2, r2, ", Does any player wish to accept?")
+        else:
+            print(self.name, "Wishes to trade ", amount1, r1, "and", amount3, r3, "for", amount2, r2, "and", amount4, r4)
+            input1 = input("Does any player wish to accept?")
+        while input1 != "yes" and input1 != "no":
+            print(self.name, "Wishes to trade ", amount1, r1, "and", amount3, r3, "for", amount2, r2, "and", amount4, r4)
+            input1 = input("Does any player wish to accept?")
+        if input1 == "yes":
+            input3 = input("Please indicate the number of the player who wishes to accept the trade: ")
+            while int(input3) != 1 and int(input3) != 2 and int(input3) != 3 and int(input3) != 4:
+                input3 = input("Please indicate the number of the player who wishes to accept the trade: ")
+            input2 = int(input3)
+            if self.resources[r1] >= amount1 and self.resources[r3] >= amount3 and playerdict1[int(input2)].resources[r2] >= amount2 and playerdict1[int(input2)].resources[r4] >= amount4:
+                self.resources[r1] = self.resources[r1] - amount1
+                self.resources[r3] = self.resources[r3] - amount3
+                self.resources[r2] = self.resources[r2] + amount2
+                self.resources[r4] = self.resources[r4] + amount4
+                playerdict1[int(input2)].resources[r2] = playerdict1[int(input2)].resources[r2] - amount2
+                playerdict1[int(input2)].resources[r4] = playerdict1[int(input2)].resources[r4] - amount4
+                playerdict1[int(input2)].resources[r1] = playerdict1[int(input2)].resources[r1] + amount1
+                playerdict1[int(input2)].resources[r3] = playerdict1[int(input2)].resources[r3] + amount3
+            else:
+                print("You are dumb")
 
+    
+    def KnightsToVictory(self, knights, vp):
+        if self.knights == 3:
+            self.vp += 2
+        
+        
     def payoff(self):
         for cluster in clusters:
             if cluster.trigger == trigger:
@@ -352,19 +414,26 @@ class Devcard:
                 colors.append(i.color)
             colors.remove(color)
             input1 = input("What resource do you want all of, you greedy swine? ")
-            while input1 != "ham" or input1 != "pineapple" or input1 != "cheese" or input1 != "sauce" or input1 != "bread":
+            while input1.lower() != "ham" and input1.lower() != "pineapple" and input1.lower() != "cheese" and input1.lower() != "sauce" and input1.lower() != "bread":
                 input1 = input("What resource do you want all of, you greedy swine? ")
             total = 0
-            players = playerlist.remove()
-            if color == P1.color:
-                P1.resources[input1]
-                P1.resources[input1]
-            elif i.color == P2.color:
-                P2.vp += 1
-            elif i.color == P3.color:
-                P3.vp += 1
-            else:
-                P4.vp += 1
+            players = []
+            for i in playerlist:
+                players.append(i)
+            for i in playerlist:
+                if i.color == color:
+                    players.remove(i)
+                    for y in players:
+                        total += y.resources[input1]
+                        y.resources[input1] -= y.resources[input1]
+                    i.resources[input1] += total
+                    
+    def vp(self, color):
+        global playerlist
+        if self.variant == "vp":
+            for i in playerlist:
+                if i.color == color:
+                    i.vp += 1
 
     def knight(self):
         if self.variant == "knight":
@@ -384,6 +453,18 @@ class Devcard:
                                         Player.resources[resourcetaken] += 1
                                         Player.knights += 1
                                         
+    def roadbuilding(self, color):
+        global playerlist
+        input1 = int(input("Where would you like to put your first road? "))
+        input2 = int(input("Where would you like to put your second road? "))
+        while input1 > 73 or input1 < 0 or input1 > 73 or input1 < 0:
+            input1 = int(input("Where would you like to put your first road? "))
+            input2 = int(input("Where would you like to put your second road? "))
+        for i in playerlist:
+                if i.color == color:
+                    i.claimroad(input1)
+                    i.claimroad(input2)
+                                        
                                         
 
 def play():
@@ -392,17 +473,22 @@ def play():
     numplayers = input1
     return str(input1)
 
-##numplayers = 0
+numplayers = 0
 colors = ['red', 'blue', 'white', 'orange', 'green', 'brown']
 playernames = [] 
 playercolor = [] 
 playerposition = []
-
-
-
 turn = 1
+playerlist = []      
 
-            
+def makelist():
+    global playerlist
+    if numplayers == 3:
+        playerlist = [P1, P2, P3]
+    elif numplayers == 2:
+        playerlist = [P1, P2]
+    else:
+        playerlist = [P1, P2, P3, P4]      
     
 def init():
     global P1
@@ -449,26 +535,7 @@ def playerinput(string):
         playercolor.append(m) 
         playerposition.append(int(string))
         playerinput(str(int(string) - 1))
-
-movelog = open("playerlog.txt", "w")
-
-def turns():
-    global turn
-    roller()
-    for place, obj in playerdict1.items():
-        obj.payoff()
-        obj.trade()
-        build()
-        #playDevCard()
-        if turn >= 4:
-            turn == 1
-        else:
-            turn += 1
-    turns()
-            
-        
-        
-        
+    
 usedResources = []
 
 def InitialHexResourceRandomizer():
@@ -521,30 +588,10 @@ def InitialHexResourceRandomizer():
         cluster.resource = usedResources[clusters.index(cluster)]
         if cluster.resource == "desert":
             cluster.trigger == 7
-    """
-    Cluster1.resource = usedResources[0]
-    Cluster2.resource = usedResources[1]
-    Cluster3.resource = usedResources[2]
-    Cluster4.resource = usedResources[3]
-    Cluster5.resource = usedResources[4]
-    Cluster6.resource = usedResources[5]
-    Cluster7.resource = usedResources[6]
-    Cluster8.resource = usedResources[7]
-    Cluster9.resource = usedResources[8]
-    Cluster10.resource = usedResources[9]
-    Cluster11.resource = usedResources[10]
-    Cluster12.resource = usedResources[11]
-    Cluster13.resource = usedResources[12]
-    Cluster14.resource = usedResources[13]
-    Cluster15.resource = usedResources[14]
-    Cluster16.resource = usedResources[15]
-    Cluster17.resource = usedResources[16]
-    Cluster18.resource = usedResources[17]
-    Cluster19.resource = usedResources[18]
-    """        
+            
 usedID = []
 IDGenned = []
-
+ClustersForMapping = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
 
 def InitialHexTriggerRandomizer():
     while len(usedID) < 18:          
@@ -619,12 +666,13 @@ def InitialHexTriggerRandomizer():
                 InitialHexTriggerRandomizer()
             if usedID.count(12) >= 2:
                 InitialHexTriggerRandomizer()
-    for cluster in clusters:
+    for cluster in ClustersForMapping:
         if cluster.resource == 'desert':
             cluster.trigger = 7
+            ClustersForMapping.pop(ClustersForMapping.index(cluster))
         else:
             for ID in IDGenned:
-                cluster.trigger = IDGenned[clusters.index(cluster)]
+                cluster.trigger = IDGenned[ClustersForMapping.index(cluster)]
                 
 
 """    
@@ -937,6 +985,11 @@ def howmanynodes(color):
             a += 1
     return a
             
+def haswon():
+    for i in playerlist:
+        if i.vp == 10:
+            print("Congratulations, " + i.name + "!!! You have just won the game!")            
+            
 def hamburglar():
     if cluster.isrobber == True:
         cluster.tempresource = clusters.resource
@@ -951,14 +1004,32 @@ def move_hamburglar():
         relevant_var = hamburglar_newloc - 1
         robber_loc = False
         clusters[relevant_var].isrobber = True
-"""
+        
+def turns():
+    global turn
+    roller()
+    for place, obj in playerdict1.items():
+        obj.payoff()
+        obj.trade()
+        build()
+        move_hamburglar()
+        has_won()
+        #playDevCard()
+        if turn >= 4:
+            turn == 1
+        else:
+            turn += 1
+    turns()
+    
+
 InitialHexResourceRandomizer()
 InitialHexTriggerRandomizer()
 ClusterToNode()
 playerinput(play())
 initialize(int(numplayers))
 initializepart2(int(numplayers))
-"""
+turns()
+
 def debugbypass():
     global P1
     global P2
@@ -976,7 +1047,5 @@ def debugbypass():
     InitialHexTriggerRandomizer()
     ClusterToNode()
     
-def trigger_debug():
-    for cluster in clusters:
-        print(cluster.resource, cluster.trigger)
+
     
