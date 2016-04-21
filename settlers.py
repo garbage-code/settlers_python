@@ -1,42 +1,38 @@
 #Settlers of Catan
-
 import random
 
-"""
-CODE DIRECTORY:
-Line 33: Beginning of node invocations
-Line 86: End of node invocations
-Line 87: Beginning of road invocations
-Line 158: End of road invocations
-Line 159: Beginning of Cluster invocations
-Line 177: End of cluster invocations
-Line 178-182: Lists of clusters, roads, and nodes
-Line 183: Player Class
-Line 578: Node Class
-Line 602: Road Class
-Line 619: Cluster Class
-Line 629: Roller function
-Line 635: Startup function
-Line 651: Initialize Function
-Line 677: Player Input Function
-Line 699: Hex Resource Randomizer Function
-Line 767: Hex Trigger Randomizer Function
-Line 860: Cluster to Node Distributor Function
-Line 885 - 914: Verifier functions:
-Line 916: Build Function
-Line 951 - 1022: Initialization Functions
-Line 1024 - 1041: Robber
-"""
-
 class Node:
+
+    """
+    This is a class that represents all the nodes on the board.
+
+    Attributes
+    ----------
+    id : unique identifier of id. mostly for testing.
+    resource : resource that the id holds
+    claimed : if the node is claimed
+    claimedby : who the node is claimed by
+    iscity : if the node is a city
+    """
+
     def __init__(self, id, claimed = False, iscity = False):
+        """
+        Initialize function for the class.
+        """
         self.id = id
         self.resource = []
         self.claimed = claimed
         self.claimedby = ""
         self.iscity = iscity 
     
-    def claim(self, color):   #Need to only allow if certain color is other one
+    def claim(self, color):
+        """
+        Claims nodes for a player
+
+        Arguments
+        ---------
+        color : color of the player claiming the node
+        """
         if canclaim(self, color) == True:
             self.claimed = True
             self.claimedby = color
@@ -55,6 +51,13 @@ class Node:
         
     
     def claimbypass(self, color):
+        """
+        Claims a node for a player. Mostly for testing.
+
+        Arguments
+        ---------
+        color : what color is claiming
+        """
         self.claimed = True
         self.claimedby = color
         for i in playerlist:
@@ -69,6 +72,13 @@ class Node:
                     P4.vp += 1
     
     def makecity(self, color):
+        """
+        Makes a city and gives it to the respective player.
+        
+        Arguments
+        ---------
+        color : what color is claiming
+        """
         if cancity(self, color) == True:
             self.iscity = True 
             for i in playerlist:
@@ -83,12 +93,30 @@ class Node:
                         P4.vp += 1
             
 class Road:
+    
+    """
+    This is the class that represents all the pairs on the board.
+    
+    Attributes
+    ----------
+    claimed : if the road is claimed
+    nodes : the nodes that the road connects
+    claimedby : who the road is claimed by
+    """
     def __init__(self, nodes = []):
+        """Initializes the whole thing"""
         self.claimed = False
         self.nodes = []
         self.claimedby = ""
     
     def claim(self, color):
+        """
+        Claims the road for the color.
+
+        Arguments
+        ---------
+        color : the color who is claiming
+        """
         if canclaimroad(self, color) == True:
             self.claimed = True
             self.claimedby = color
@@ -96,10 +124,31 @@ class Road:
             print("Can't claim")
 
     def claimbypass(self, color):
+        """
+        Claims the road for the color. Mostly for testing.
+        
+        Arguments
+        ---------
+        color : color to give the road to
+        """
         self.claimed = True
         self.claimedby = color
             
 class Cluster:
+
+    """
+    This is the class for all the hexes on the board.
+
+    Attributes
+    ----------
+    id : unique identifier of the cluster
+    resource : resource the cluster holds
+    roads : the roads that the cluster is made of
+    isrobber : if the robber occupies that cluster
+    tempresource : backup for the resource. used for the robber.
+    trigger : number that triggers the cluster to generate
+    """
+
     def __init__(self, isrobber = False):
         self.id = ""        
         self.resource = ""
@@ -109,15 +158,18 @@ class Cluster:
         self.trigger = 0
         
 def roller():
+    """
+    This function acts as the dice. Picks a random number.
+    """
     global trigger
     trigger = random.choice([2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
 
 Nodes = []
-
+#These lines create Node objects
 for i in range(54):
     Nodes.append(Node(i+1))
     
-
+#The below code creates roads and maps nodes to roads.
 road0 = Road()
 road0.nodes = [Nodes[3], Nodes[0]]
 road1 = Road()
@@ -262,6 +314,7 @@ road70 = Road()
 road70.nodes = [Nodes[32], Nodes[37]]
 road71 = Road()
 road71.nodes = [Nodes[43], Nodes[38]]
+#The below code invokes clusters. Allocates roads to clusters.
 Cluster1 = Cluster()
 Cluster1.roads = [road0, road6, road11, road12, road7, road1]
 Cluster1.id = 1
@@ -324,6 +377,23 @@ Roads = [road0, road1, road2, road3, road4, road5, road6, road7, road8, road9, r
 nodedict = {1 : Nodes[0], 2 : Nodes[1], 3 : Nodes[2], 4 : Nodes[3], 5 : Nodes[4], 6 : Nodes[5], 7 : Nodes[6], 8 : Nodes[7], 9 : Nodes[8], 10 : Nodes[9], 11 : Nodes[10], 12 : Nodes[11], 13 : Nodes[12], 14 : Nodes[13], 15 : Nodes[14], 16 : Nodes[15], 17 : Nodes[16], 18 : Nodes[17], 19 : Nodes[18], 20 : Nodes[19], 21 : Nodes[20], 22 : Nodes[21], 23 : Nodes[22], 24 : Nodes[23], 25 : Nodes[24], 26 : Nodes[25], 27 : Nodes[26], 28 : Nodes[27], 29 : Nodes[28], 30 : Nodes[29], 31 : Nodes[30], 32 : Nodes[31], 33 : Nodes[32], 34 : Nodes[33], 35 : Nodes[34], 36 : Nodes[35], 37 : Nodes[36], 38 : Nodes[37], 39 : Nodes[38], 40 : Nodes[39], 41 : Nodes[40], 42 : Nodes[41], 43 : Nodes[42], 44 : Nodes[43], 45 : Nodes[44], 46 : Nodes[45], 47 : Nodes[46], 48 : Nodes[47], 49 : Nodes[48], 50 : Nodes[49], 51 : Nodes[50], 52 : Nodes[51], 53 : Nodes[52], 54 : Nodes[53]}       
 roaddict = {0 : road0, 1 : road1, 2 : road2, 3 : road3, 4 : road4, 5 : road5, 6 : road6, 7 : road7, 8 : road8, 9 : road9, 10 : road10, 11 : road11, 12 : road12, 13 : road13, 14 : road14, 15 : road15, 16 : road16, 17 : road17, 18 : road18, 19 : road19, 20 : road20, 21 : road21, 22 : road22, 23 : road23, 24 : road24, 25 : road25, 26 : road26, 27 : road27, 28 : road28, 29 : road29, 30 : road30, 31 : road31, 32 : road32, 33 : road33, 34 : road34, 35 : road35, 36 : road36, 37 : road37, 38 : road38, 39 : road39, 40 : road40, 41 : road41, 42 : road42, 43 : road43, 44 : road44, 45 : road45, 46 : road46, 47 : road47, 48 : road48, 49 : road49, 50 : road50, 51 : road51, 52 : road52, 53 : road53, 54 : road54, 55 : road55, 56 : road56, 57 : road57, 58 : road58, 59 : road59, 60 : road60, 61 : road61, 62 : road62, 63 : road63, 64 : road64, 65 : road65, 66 : road66, 67 : road67, 68 : road68, 69 : road69, 70 : road70, 71 : road71}
 class Player:
+
+    """
+    This class manages Players.
+
+    Attributes
+    ----------
+    name : name of player
+    color : color of player
+    position : position in the rotation
+    resources : how many resources the player has.
+    development : how many development cards the player has
+    nodes : how many nodes the player has
+    roads : how many roads the player has built
+    knights : how many knights the player owns
+    vp : victory points the player has
+    """
+
     def __init__(self, name, color, position):
         self.name = name
         self.color = color
@@ -334,14 +404,25 @@ class Player:
                           'sauce'    : 0, 
                           'cheese'   : 0}
         self.development = []
-        self.progress = []
-        self.special = []
         self.nodes = []
         self.roads = []
         self.knights = 0
         self.vp = 0
         
     def trade(self, r1, r2, r3, r4, amount1, amount2, amount3, amount4):
+        """
+        Trades between players.
+        
+        Arguments:
+        r1 : first resource
+        r2 : second resource
+        r3 : third resource
+        r4 : fourth resource
+        amount1 : first amount (corresponds to r1)
+        amount2 : second amount (corresponds to r2)
+        amount3 : third amount (corresponds to r3)
+        amount4 : fourth amount (corresponds to r4)
+        """
         if amount3 == 0 and amount4 == 0:
             print(self.name, "Wishes to trade ", amount1, r1, "for", amount2, r2, ", Does any player wish to accept?")
         else:
@@ -369,11 +450,22 @@ class Player:
 
     
     def KnightsToVictory(self, knights, vp):
+        """
+        Checks if the player has 3 knights. If so, they get 2 victory points.
+
+        Arguments
+        ---------
+        knights : how many knights
+        vp : how many victory points
+        """
         if self.knights == 3:
             self.vp += 2
         
         
     def payoff(self):
+        """
+        Checks if the player owns a node that borders a hex that is producing.
+        """
         for cluster in clusters:
             if cluster.trigger == trigger:
                 if cluster.resource == "ham":
@@ -387,26 +479,74 @@ class Player:
                 elif cluster.resource == "sauce":
                     self.resources['sauce'] += 1
     
-    def claimnode(self, node): # Needs finishing
+    def claimnode(self, node):
+        """
+        claims a node to the player if the color owns it.
+
+        Arguments
+        ---------
+        node : what node is being claimed
+        """
         for loopnode in Nodes:
             if loopnode == node:
                 loopnode.claim(self.color)
     
     def claimroad(self, road):
+        """
+        claims a road to the player if the color owns it.
+
+        Arguments
+        ---------
+        road : what road is being claimed
+        """
         for looproad in Roads:
             if looproad == road:
                 looproad.claim(self.color)
             
     def makepapa(self, node):
+        """
+        creates a papa johns if a papa johns can be made.
+
+        Arguments
+        ---------
+        node : where the papa johns is being built
+        """
         for peyton in Nodes:
             if peyton == node:
                 peyton.makecity(self.color)
 
 class Devcard:
+    
+    """
+    Manages development cards. !!!NOT IMPLEMENTED!!!
+
+    Attributes
+    ----------
+    variant : what kind of card the dev card is.
+    """
+
     def __init__(self, variant):
+        """
+        Initializes the class with the argument variant.
+        
+        Arguments
+        ---------
+        variant : what kind of card the development card is
+        """
         self.variant = variant 
         
     def monopoly(self, color):
+        """
+        The monopoly card allows the player to grab all the resources.
+        
+        Arguments
+        ---------
+        color : what color the player is
+        
+        Globals
+        -------
+        playerlist : list of all players. used in order for a for loop traversal.
+        """
         global playerlist
         if self.variant == "monopoly":
             colors = []
@@ -429,6 +569,17 @@ class Devcard:
                     i.resources[input1] += total
                     
     def vp(self, color):
+        """
+        Allows the player to use a victory point card, and gain one victory point.
+        
+        Arguments
+        ---------
+        color : color of player
+
+        Globals
+        -------
+        playerlist : list of players
+        """
         global playerlist
         if self.variant == "vp":
             for i in playerlist:
@@ -436,6 +587,14 @@ class Devcard:
                     i.vp += 1
 
     def knight(self):
+        """
+        Allows the player to pull the knight card. Moves the robber.
+
+        Globals
+        -------
+        robber_loc : location of robber.
+        """
+        global robber_loc
         if self.variant == "knight":
             hamburglar_newloc = int(input("Where would you like to move the hamburglar?"))
             relevant_var = hamburglar_newloc - 1
@@ -454,6 +613,13 @@ class Devcard:
                                         Player.knights += 1
                                         
     def roadbuilding(self, color):
+        """
+        Mainly for testing. Builds roads.
+        
+        Arguments
+        ---------
+        color : who owns the roads
+        """
         global playerlist
         input1 = int(input("Where would you like to put your first road? "))
         input2 = int(input("Where would you like to put your second road? "))
@@ -468,6 +634,14 @@ class Devcard:
                                         
 
 def play():
+    """
+    Prompts for how many players to start code.
+    
+    Globals
+    -------
+    numplayers : decides how many players are in the game
+    """
+
     global numplayers
     input1 = input("How Many Players?:   ")
     numplayers = input1
@@ -482,6 +656,13 @@ turn = 1
 playerlist = []      
 
 def makelist():
+    """
+    Creates a list of players depending on how many players are present in the game.
+
+    Globals
+    -------
+    playerlist : list of player objects
+    """
     global playerlist
     if numplayers == 3:
         playerlist = [P1, P2, P3]
@@ -491,6 +672,18 @@ def makelist():
         playerlist = [P1, P2, P3, P4]      
     
 def init():
+    """
+    Begins code depending on how many players. Maps players to numbers.
+
+    Globals
+    -------
+    P1 : player 1 object
+    P2 : player 2 object
+    P3 : player 3 object
+    P4 : player 4 object
+    playerdict : mapping players to numbers
+    playerdict1 : mapping players to numbers the other way
+    """
     global P1
     global P2
     global P3
@@ -517,6 +710,18 @@ def init():
         playerdict1 = {1 : P1, 2 : P2}
     
 def playerinput(string):
+    """
+    Prompts for input to create player classes and attribute color and name to players.
+
+    Globals
+    -------
+    playernames : list of player names
+    colors : list of all colors
+
+    Arguments
+    ---------
+    string : amount of players in the game. deduced from play()
+    """
     global playernames
     global colors
     if int(string) == 1:
@@ -539,6 +744,13 @@ def playerinput(string):
 usedResources = []
 
 def InitialHexResourceRandomizer():
+    """
+    Randomly assigns resources to certain hexes.
+
+    Globals
+    -------
+    desert_loc : tracks where the desert is
+    """
     global desert_loc
     while len(usedResources) < 19:            
         ResourceGenVar = random.choice(["ham", "pineapple", "cheese", "sauce", "bread", "desert"])
@@ -594,6 +806,9 @@ IDGenned = []
 ClustersForMapping = [Cluster1, Cluster2, Cluster3, Cluster4, Cluster5, Cluster6, Cluster7, Cluster8, Cluster9, Cluster10, Cluster11, Cluster12, Cluster13, Cluster14, Cluster15, Cluster16, Cluster17, Cluster18, Cluster19]
 
 def InitialHexTriggerRandomizer():
+    """
+    Randomly assigns triggers to each hex. Always assigns 7 to the desert.
+    """
     while len(usedID) < 18:          
         IDGenVar = int(random.choice([2, 3, 4, 5, 6, 8, 9, 10, 11, 12]))
         if IDGenVar == 2:
@@ -673,18 +888,16 @@ def InitialHexTriggerRandomizer():
         else:
             for ID in IDGenned:
                 cluster.trigger = IDGenned[ClustersForMapping.index(cluster)]
-                
-
-"""    
-    for results in IDGenned:
-        for cluster in clusters:
-            if cluster.resource == "desert":
-                cluster.trigger = 7
-            else:
-                cluster.trigger = IDGenned[results]
-"""
 
 def isNeighbor(point1, point2):
+    """
+    Checks if two points neighbor each other.
+    
+    Arguments
+    ---------
+    point1 : the first point
+    point2 : the second point
+    """
     for road in Roads:
         if [point1, point2] == road.nodes:
             return True
@@ -692,6 +905,13 @@ def isNeighbor(point1, point2):
             return True
     
 def ClusterToNode():
+    """
+    Assigns cluster attributes to nodes.
+    
+    Globals
+    -------
+    robber_loc : location of robber
+    """
     global robber_loc
     for cluster in clusters:
         for road in cluster.roads:
@@ -721,6 +941,14 @@ def ClusterToNode():
             node.resource = temp
                
 def canclaimroad(roadr, color):
+    """
+    Tests if road can be claimed.
+
+    Arguments
+    ---------
+    roadr : the road looking to be claimed
+    color : the color by which the road is going to be claimed
+    """
     a = False
     for roads in Roads:
         if roads.claimed == True and roads.claimedby == color:
@@ -731,6 +959,14 @@ def canclaimroad(roadr, color):
     return a
     
 def canclaim(noder, color):
+    """
+    Tests if the node can be claimed.
+
+    Arguments
+    ---------
+    noder : the node looking to be claimed
+    color : the color of which the node is going to be claimed
+    """
     colors = ['red', 'blue', 'white', 'orange', 'green', 'brown']
     colors.remove(color)
     a = False
@@ -745,6 +981,14 @@ def canclaim(noder, color):
     return a
                 
 def cancity(noder, color):
+    """
+    Checks if the city can be built on the specified node.
+    
+    Arguments
+    ---------
+    noder : the node looking to have a newly built city
+    color : the color of the player doing the whole thing
+    """
     if noder.claimedby == color:
         return True
     else:
@@ -752,6 +996,13 @@ def cancity(noder, color):
         return False
  
 def build(): #Needs to be finished
+    """
+    Prompts user for input, checks if they have the resource, builds accordingly.
+
+    Globals
+    -------
+    turn : checks which turn it is.
+    """
     global turn
     print("\n Choices: \n Road (1 Pineapple, 1 Cheese) \n Pizza Hut (1 Bread, 1 Cheese, 1 Pineapple, 1 Sauce) \n Papa Johns (3 Ham, 2 Bread) \n  ")
     input2 = input("What would you like to construct?    ")
@@ -867,6 +1118,13 @@ def build(): #Needs to be finished
                 build()
 
 def trade():
+    """
+    Sets up trades between players.
+    
+    Globals
+    -------
+    turn : checks which player is actively doing things.
+    """
     global turn
     input5 = ""
     input6 = ""
@@ -896,7 +1154,7 @@ def trade():
             P3.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
         elif turn == 4:
             P4.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
-    elif input9.lower() == "no": #FIX
+    elif input9.lower() == "no": 
         if turn == 1:
             P1.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
         elif turn == 2:
@@ -907,12 +1165,26 @@ def trade():
             P4.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
 
 def validresource(a):
+    """
+    Checks if given input is a valid resource. Sanitizes input.
+
+    Arguments
+    ---------
+    a : input of the user. 
+    """
     if a.lower() == "ham" or a.lower() == "pineapple" or a.lower() == "sauce" or a.lower() == "bread" or  a.lower() == "cheese":
         return True
     else:
         return False
 
 def initialize(n):
+    """
+    Initializes game, places starter settlements and roads. Part 1.
+
+    Arguments
+    ---------
+    n : how many players
+    """
     if n == 1:
         input4 = input("Please place your first settlement, " + playerdict[n].name + ":   ")
         while nodedict[int(input4)].claimedby != playerdict[n].color:
@@ -946,6 +1218,13 @@ def initialize(n):
         initialize(n-1)
         
 def initializepart2(n):
+    """
+    Initializes game, places starter settlements and roads. Part 2.
+
+    Arguments
+    ---------
+    n : how many players
+    """
     if n == 1:
         input4 = input("Please place your second settlement, " + playerdict1[n].name + ":   ")
         while nodedict[int(input4)].claimedby != playerdict1[n].color:
@@ -979,6 +1258,13 @@ def initializepart2(n):
         initializepart2(n-1)
       
 def howmanynodes(color):
+    """
+    Checks how many nodes are owned by a color.
+
+    Argument
+    --------
+    color : which color to test how many nodes are claimed
+    """
     a = 0
     for node in Nodes:
         if node.claimedby == color:
@@ -986,11 +1272,17 @@ def howmanynodes(color):
     return a
             
 def haswon():
+    """
+    Checks if anyone has won.
+    """
     for i in playerlist:
         if i.vp == 10:
             print("Congratulations, " + i.name + "!!! You have just won the game!")            
             
 def hamburglar():
+    """
+    Triggers the robber.
+    """
     if cluster.isrobber == True:
         cluster.tempresource = clusters.resource
         cluster.resource = ""
@@ -999,6 +1291,9 @@ def hamburglar():
             cluster.resource = clusters.tempresource            
 
 def move_hamburglar():
+    """
+    Moves the robber if a 7 is rolled.
+    """
     if trigger == 7:
         hamburglar_newloc = int(input("Where would you like to move the hamburglar?"))
         relevant_var = hamburglar_newloc - 1
@@ -1006,13 +1301,20 @@ def move_hamburglar():
         clusters[relevant_var].isrobber = True
         
 def turns():
+    """
+    Moderates turns.
+
+    Globals
+    -------
+    turn : which player is active.
+    """
     global turn
     roller()
     for place, obj in playerdict1.items():
         obj.payoff()
+        move_hamburglar()
         obj.trade()
         build()
-        move_hamburglar()
         has_won()
         #playDevCard()
         if turn >= 4:
@@ -1022,6 +1324,10 @@ def turns():
     turns()
     
 
+
+
+
+
 InitialHexResourceRandomizer()
 InitialHexTriggerRandomizer()
 ClusterToNode()
@@ -1029,23 +1335,3 @@ playerinput(play())
 initialize(int(numplayers))
 initializepart2(int(numplayers))
 turns()
-
-def debugbypass():
-    global P1
-    global P2
-    global P3
-    global P4
-    global playerdict
-    global playerdict1
-    P1 = Player("Carter", "Blue", 4)
-    P2 = Player("Mikol", "Red", 3)
-    P3 = Player("Peter", "Brown", 2)
-    P4 = Player("John", "Green", 1)
-    playerdict = {4 : P1, 3: P2, 2: P3, 1 : P4}
-    playerdict1 = {1 : P1, 2 : P2, 3 : P3, 4 : P4}
-    InitialHexResourceRandomizer()    
-    InitialHexTriggerRandomizer()
-    ClusterToNode()
-    
-
-    
