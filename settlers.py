@@ -1,5 +1,6 @@
 #Settlers of Catan
 import random
+import string
 
 class Node:
 
@@ -408,6 +409,7 @@ class Player:
         self.roads = []
         self.knights = 0
         self.vp = 0
+        self.received = []
         
     def trade(self, r1, r2, r3, r4, amount1, amount2, amount3, amount4):
         """
@@ -423,13 +425,15 @@ class Player:
         amount3 : third amount (corresponds to r3)
         amount4 : fourth amount (corresponds to r4)
         """
-        if amount3 == 0 and amount4 == 0:
+        input1 = ""
+        input3 = ""
+        input2 = ""
+        if amount3 == 0 and amount4 == 0 and r3 == 0 and r4 == 0:
             print(self.name, "Wishes to trade ", amount1, r1, "for", amount2, r2, ", Does any player wish to accept?")
         else:
             print(self.name, "Wishes to trade ", amount1, r1, "and", amount3, r3, "for", amount2, r2, "and", amount4, r4)
             input1 = input("Does any player wish to accept?")
         while input1 != "yes" and input1 != "no":
-            print(self.name, "Wishes to trade ", amount1, r1, "and", amount3, r3, "for", amount2, r2, "and", amount4, r4)
             input1 = input("Does any player wish to accept?")
         if input1 == "yes":
             input3 = input("Please indicate the number of the player who wishes to accept the trade: ")
@@ -447,6 +451,8 @@ class Player:
                 playerdict1[int(input2)].resources[r3] = playerdict1[int(input2)].resources[r3] + amount3
             else:
                 print("You are dumb")
+        else:
+            print("Nothing was traded!")
 
     
     def KnightsToVictory(self, knights, vp):
@@ -469,15 +475,22 @@ class Player:
         for cluster in clusters:
             if cluster.trigger == trigger:
                 if cluster.resource == "ham":
+                    self.received.append("one ham")
                     self.resources['ham'] += 1
                 elif cluster.resource == "pineapple":
                     self.resources['pineapple'] += 1
+                    self.received.append("one pineapple")
                 elif cluster.resource == "bread":
                     self.resources['bread'] += 1
+                    self.received.append("one bread")
                 elif cluster.resource == "cheese":
                     self.resources['cheese'] += 1
+                    self.received.append("one cheese")
                 elif cluster.resource == "sauce":
+                    self.received.append("one sauce")
                     self.resources['sauce'] += 1
+        if self.received == []:
+            self.received = "nothing"
     
     def claimnode(self, node):
         """
@@ -664,9 +677,9 @@ def makelist():
     playerlist : list of player objects
     """
     global playerlist
-    if numplayers == 3:
+    if numplayers == '3':
         playerlist = [P1, P2, P3]
-    elif numplayers == 2:
+    elif numplayers == '2':
         playerlist = [P1, P2]
     else:
         playerlist = [P1, P2, P3, P4]      
@@ -1156,13 +1169,13 @@ def trade():
             P4.trade(input5, input6, input10, input11, int(input7), int(input8), int(input12), int(input13))
     elif input9.lower() == "no": 
         if turn == 1:
-            P1.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+            P1.trade(input5, input6, 0, 0, int(input7), int(input8), 0, 0)
         elif turn == 2:
-            P2.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+            P2.trade(input5, input6, 0, 0, int(input7), int(input8), 0, 0)
         elif turn == 3:
-            P3.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+            P3.trade(input5, input6, 0, 0, int(input7), int(input8), 0, 0)
         elif turn == 4:
-            P4.trade(int(input7), int(input8), "pineapple", "ham", 0, 0)
+            P4.trade(input5, input6, 0, 0, int(input7), int(input8), 0, 0)
 
 def validresource(a):
     """
@@ -1310,12 +1323,16 @@ def turns():
     """
     global turn
     roller()
+    print("The Dice has been rolled and resources have been given!")
+    for player in playerlist:
+        print(player.name + " " + "got " + " ".join(player.received))
     for place, obj in playerdict1.items():
         obj.payoff()
         move_hamburglar()
+        trade()
         obj.trade()
         build()
-        has_won()
+        haswon()
         #playDevCard()
         if turn >= 4:
             turn == 1
@@ -1327,11 +1344,11 @@ def turns():
 
 
 
-
 InitialHexResourceRandomizer()
 InitialHexTriggerRandomizer()
 ClusterToNode()
 playerinput(play())
+makelist()
 initialize(int(numplayers))
 initializepart2(int(numplayers))
 turns()
